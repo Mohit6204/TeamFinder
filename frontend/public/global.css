@@ -1,0 +1,59 @@
+body {
+     background-color: #000000;
+     background-image: url("https://www.transparenttextures.com/patterns/cubes.png");     
+     position: absolute;
+     min-width: 100%;
+     min-height: 100%;
+}
+footer {
+     text-align: center;
+     position: fixed;
+     bottom: 0;
+     width: 100%;
+     background-color: rgb(228, 226, 226);
+}
+
+.rform {
+     text-align: center;
+     width: 50%;
+     margin: 20px auto;
+}
+
+.navlink {
+     display: block;
+     padding: 0.5rem 0.5rem;
+     font-size: var(--bs-nav-link-font-size);
+     font-weight: var(--bs-nav-link-font-weight);
+     color: var(--bs-nav-link-color);
+     text-decoration: none;
+     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+
+}
+
+.navlink:hover {
+     color: rgba(255, 255, 255, 0.75);
+}
+
+post-list {
+     display: flex;
+     /* width: 40%; */
+     flex-direction: row;
+     flex-wrap: wrap;
+     margin: 10px;
+     justify-content: left;
+}
+.navbrand {
+     padding-top: var(--bs-navbar-brand-padding-y);
+    padding-bottom: var(--bs-navbar-brand-padding-y);
+    margin-right: var(--bs-navbar-brand-margin-end);
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.navbrand:hover {
+    color: white;
+}
+.team-show {
+     border-radius: 1rem;
+}
