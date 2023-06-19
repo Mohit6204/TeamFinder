@@ -1,5 +1,5 @@
 import 'bulma/css/bulma.css'
-import Navbar from "./navbar";
+import Navbar from "./navbar/navbar";
 import CreateTeam from "./CreateTeam";
 import Footer from "./Footer";
 import Accepted from "./accepted";
