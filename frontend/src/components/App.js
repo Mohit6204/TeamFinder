@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import Dashboard from "./dashboard";
 import Teams from "./teams";
 import EditTeam from "./editteam";
+import Home from './home';
 
 function App() {
   
@@ -15,7 +16,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Routes>
-        <Route path="/" element={<h1>Home</h1>} />
+        <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create" element={<CreateTeam />} />
         <Route path="/Teams" element={<Teams />} />
