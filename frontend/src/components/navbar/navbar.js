@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import NavLinks from './navLinks';
 import Button from './button';
 function Navbartop() {
+  const navigate=useNavigate();
   const [open,setOpen]=useState(false);
   return (
-      <nav className='bg-white '>
+      <nav className='bg-white shadow-lg'>
          <div className='flex items-center font-medium justify-around'>
             <div className='z-50 p-5 md:w-auto w-full flex justify-between'>
               <h2 className='cursor-pointer h-9'><span className='font-bold text-3xl '>T</span>eam<span className='font-bold'>F</span>inder</h2>
@@ -36,12 +37,22 @@ function Navbartop() {
             {/* Mobile view */}
             
             <ul className={`
-            md:hidden bg-white/50 absolute backdrop-blur-lg w-full h-full bottom-0 py-24 pl-4
+            md:hidden bg-white/40 absolute backdrop-blur-lg w-full h-full bottom-0 py-24 pl-4
             duration-500 ${open ? "left-0" : "left-[-100%]"}
             `}>
               <li>
-                <Link to="/" className="py-3 px-3 block">Home</Link>
-                <Link to="/dashboard" className="py-3 px-3 block">Dashboard</Link>
+                <div className='py-3 px-3 block cursor-pointer' onClick={()=>{
+                  setOpen(false);
+                  navigate("/");
+                }}>
+                  Home
+                </div>
+                <div className='py-3 px-3 block cursor-pointer' onClick={()=>{
+                  setOpen(false);
+                  navigate("/dashboard");
+                }}>
+                  Dashboard
+                </div>
               </li>
               <NavLinks />
               <div className='py-5'>

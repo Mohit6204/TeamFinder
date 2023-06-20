@@ -9,11 +9,13 @@ import Dashboard from "./dashboard";
 import Teams from "./teams";
 import EditTeam from "./editteam";
 import Home from './home';
+import Login from './login';
+import Register from './register';
 
 function App() {
   
   return (
-    <div className="App">
+    <div className="h-screen w-full bg-slate-200">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -23,6 +25,8 @@ function App() {
         <Route path="/Accepted" element={<Accepted />} />
         <Route path="/Pending" element={<Pending />} />
         <Route path="/edit/:id" element={<EditTeam />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
       </Routes>
       <Footer />
     </div >
