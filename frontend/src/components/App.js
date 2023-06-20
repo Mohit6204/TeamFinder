@@ -15,7 +15,7 @@ import Register from './register';
 function App() {
   
   return (
-    <div className="h-screen w-full bg-slate-200">
+    <div className="h-full w-full object-cover bg-slate-200">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
