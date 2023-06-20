@@ -21,9 +21,6 @@ function Navbartop() {
                 <div className="py-7 px-3 inline-block">
                 <Link to="/dashboard">Dashboard</Link>
                 </div>
-                <div className="py-7 px-3 inline-block">
-                <Link to="/create">Create</Link>
-                </div>
               </li>
               <NavLinks />
             </ul>
@@ -39,13 +36,12 @@ function Navbartop() {
             {/* Mobile view */}
             
             <ul className={`
-            md:hidden bg-white absolute w-full h-full bottom-0 py-24 pl-4
+            md:hidden bg-white/50 absolute backdrop-blur-lg w-full h-full bottom-0 py-24 pl-4
             duration-500 ${open ? "left-0" : "left-[-100%]"}
             `}>
               <li>
                 <Link to="/" className="py-3 px-3 block">Home</Link>
                 <Link to="/dashboard" className="py-3 px-3 block">Dashboard</Link>
-                <Link to="/create" className="py-4 px-3 block">Create</Link>
               </li>
               <NavLinks />
               <div className='py-5'>

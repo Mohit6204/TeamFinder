@@ -6,7 +6,8 @@ function NavLinks(){
         {head:"Accepted", link:'/Accepted'}
     ]},{name:"My Teams",sublinks:[
         {head:"All Teams", link:'/allTeams'},
-        {head:"Join Requests", link:'/joinRequest'}]}]
+        {head:"Join Requests", link:'/joinRequest'},
+        {head:"Create Team", link:'/create'}]}]
    
         const [heading,setHeading]=useState('');
 
@@ -15,7 +16,7 @@ function NavLinks(){
        {links.map((link)=>(
          <div>
             <div className="px-3 text-left cursor-default group">
-                <h1 className="py-7 flex justify-between items-center md:pr-0 pr-5 group" onClick={()=>{
+                <h1 className="py-7 flex justify-between cursor-pointer items-center group" onClick={()=>{
                     heading !== link.name ? setHeading(link.name) : setHeading('')
                 }}>{link.name}
                 
