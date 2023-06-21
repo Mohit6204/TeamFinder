@@ -1,6 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Register=()=>{
+
+
+    const addUser = async (newUser) => {
+        try {
+           console.log(newUser);
+           navigate("/");
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+   const navigate=useNavigate();
+   const [User, setUser] = useState({
+        firstName: "",
+        lastName: "",
+        contactNumber:null,
+        number:null,
+        email:"",
+        password:""
+   })
+
+   function handlechange(event) {
+        const { name, value } = event.target;
+        setUser(user => {
+             return {
+                  ...user,
+                  [name]: value
+             };
+        });
+   }
+
+
 
     return(
         <form>
@@ -10,28 +43,31 @@ const Register=()=>{
            </div>
            <div className=" flex flex-col justify-between overflow-auto xl:flex-row ">
            <div className=" flex justify-center py-4 flex-col xl:w-2/5 w-full">
-               <label className=" pl-1 pb-2 text-slate-800">First Name</label>
-               <input className=" border-2 rounded-lg px-2 overflow-auto" type="text" placeholder="First Name" required={true}/>
+               <label className=" pl-1 pb-2 text-slate-800" htmlFor="firstName">First Name</label>
+               <input className=" border-2 rounded-lg px-2 overflow-auto" type="text" id="firstName" name="firstName" value={User.firstName} placeholder="First Name" required={true} onChange={handlechange}/>
            </div>
            <div className=" flex justify-center py-4 flex-col xl:w-2/5 w-full">
-               <label className=" pl-1 pb-2 text-slate-800">Last Name</label>
-               <input className=" border-2 rounded-lg px-2 overflow-auto" type="text" placeholder="Last Name" required={true}/>
+               <label className=" pl-1 pb-2 text-slate-800" htmlFor="lastName">Last Name</label>
+               <input className=" border-2 rounded-lg px-2 overflow-auto" type="text" id="lastName" name="lastName" value={User.lastName} placeholder="Last Name" required={true} onChange={handlechange}/>
            </div>
            </div>
            <div className=" flex justify-center py-4 flex-col">
-               <label className=" pl-1 pb-2 text-slate-800">Contact Number</label>
-               <input className=" border-2 rounded-lg px-2 overflow-auto [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" type="number" placeholder="Enter your Contact Number" required={true}/>
+               <label className=" pl-1 pb-2 text-slate-800" htmlFor="contactNumber">Contact Number</label>
+               <input className=" border-2 rounded-lg px-2 overflow-auto [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" type="number" id="contactNumber" name="contactNumber" value={User.contactNumber} placeholder="Enter your Contact Number" required={true} onChange={handlechange}/>
            </div>
            <div className=" flex justify-center py-4 flex-col">
-               <label className=" pl-1 pb-2 text-slate-800">Email</label>
-               <input className=" border-2 rounded-lg px-2 overflow-auto" type="email" placeholder="Enter your Email" required={true}/>
+               <label className=" pl-1 pb-2 text-slate-800" htmlFor="email">Email</label>
+               <input className=" border-2 rounded-lg px-2 overflow-auto" type="email" id="email" name="email" value={User.email} placeholder="Enter your Email" required={true} onChange={handlechange}/>
            </div>
            <div className=" flex justify-center pb-4 flex-col">
-               <label className=" pl-1 pb-2 text-slate-800">Password</label>
-               <input className=" border-2 rounded-lg px-2 overflow-auto w-full" type="password" placeholder="Enter your Password" required={true}/>
+               <label className=" pl-1 pb-2 text-slate-800" htmlFor="password">Password</label>
+               <input className=" border-2 rounded-lg px-2 overflow-auto w-full" type="password" id="password" name="password" value={User.password} placeholder="Enter your Password" required={true} onChange={handlechange}/>
            </div>
            <div className=" flex justify-center pt-4">
-                <button className=" cursor-pointer rounded-full text-white bg-black px-8 py-1 hover:bg-black/80 overflow-auto text-xl">Submit</button>
+                <button className=" cursor-pointer rounded-full text-white bg-black px-8 py-1 hover:bg-black/80 overflow-auto text-xl" onClick={(e)=>{
+                    e.preventDefault();
+                    addUser(User);
+                }}>Submit</button>
            </div>
         </div>
         </form>
