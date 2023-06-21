@@ -6,7 +6,7 @@ const Register=()=>{
 
     const addUser = async (newUser) => {
         try {
-           console.log(newUser);
+           
            navigate("/");
         } catch (error) {
           console.log(error);
