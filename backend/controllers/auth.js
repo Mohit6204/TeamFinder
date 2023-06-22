@@ -9,6 +9,7 @@ export const register=async (req,res)=>{
             firstName,
             lastName,
             email,
+            contactNumber,
             password
         } = req.body
 
@@ -18,6 +19,7 @@ export const register=async (req,res)=>{
         const newUser=new User({
             firstName,
             lastName,
+            contactNumber,
             email,
             password:passwordHash,
             teams:[],
