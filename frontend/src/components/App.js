@@ -11,12 +11,15 @@ import EditTeam from "./editteam";
 import Home from './home';
 import Login from './login';
 import Register from './register';
+import store from '../store/store';
+import { Provider } from 'react-redux';
 
 function App() {
   
   return (
     <div className="h-full w-full object-cover bg-slate-200">
-      <Navbar />
+    <Provider store={store}>
+    <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -29,6 +32,7 @@ function App() {
         <Route path="/Register" element={<Register />} />
       </Routes>
       <Footer />
+    </Provider>
     </div >
   );
 }

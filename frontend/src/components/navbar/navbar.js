@@ -38,7 +38,7 @@ function Navbartop() {
             
             <ul className={`
             md:hidden bg-white/40 absolute backdrop-blur-lg w-full h-full bottom-0 py-24 pl-4
-            duration-500 ${open ? "left-0" : "left-[-100%]"}
+            duration-500 ${open ? "left-0" : "left-[-100%]"} z-30
             `}>
               <li>
                 <div className='py-3 px-3 block cursor-pointer' onClick={()=>{
