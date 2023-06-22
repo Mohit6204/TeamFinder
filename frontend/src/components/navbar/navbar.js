@@ -3,8 +3,18 @@ import {Link, useNavigate} from 'react-router-dom';
 import NavLinks from './navLinks';
 import Button from './button';
 import {useSelector } from 'react-redux/es/hooks/useSelector';
+import { setLogin, setMyUser } from "../../store/authSlice";
+import { useDispatch } from 'react-redux';
 
 function Navbartop() {
+  const dispatch=useDispatch();
+  const handleLogout=()=>{
+       window.localStorage.removeItem("token");
+       dispatch(setLogin(false));
+       dispatch(setMyUser(null));
+       navigate("/");
+  }
+
   const check=useSelector((state)=>state.auth)
   const navigate=useNavigate();
   console.log(check.isLogin);
@@ -38,7 +48,7 @@ function Navbartop() {
                             name="Register"
                           />
 
-                    </>) :(<Button name="Logout"/>)}
+                    </>) :(<div onClick={()=>handleLogout()}><Button name="Logout"/></div>)}
             </div>
 
             {/* Mobile view */}
@@ -71,7 +81,7 @@ function Navbartop() {
                             name="Register"
                           />
 
-                    </>) :(<Button name="Logout"/>)}
+                    </>) :(<div onClick={()=>handleLogout()}><Button name="Logout"/></div>)}
             </div>
             </ul>
 

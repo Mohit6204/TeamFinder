@@ -55,3 +55,17 @@ export const login = async (req,res)=>{
         res.status(500).json({error:error.message});
     }
 }
+
+// Get user 
+
+export const getUser=async (req,res)=>{
+    try {
+        const user_ID=req.user;
+        const user=await User.findById(user_ID);
+        const {password,...curUser}=user;
+        res.status(200).json(curUser);
+
+    } catch (error) {
+        res.status(500).json({error:error.message});
+    }
+}

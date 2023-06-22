@@ -1,4 +1,3 @@
-import 'bulma/css/bulma.css'
 import Navbar from "./navbar/navbar";
 import CreateTeam from "./CreateTeam";
 import Footer from "./Footer";
@@ -11,29 +10,57 @@ import EditTeam from "./editteam";
 import Home from './home';
 import Login from './login';
 import Register from './register';
-import store from '../store/store';
-import { Provider } from 'react-redux';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { setLogin, setMyUser } from '../store/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 function App() {
-   console.log("Mohit");
-  return (
-    <div className="h-full w-full object-cover bg-slate-200">
-      <Provider store={store}>
-    <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/create" element={<CreateTeam />} />
-        <Route path="/Teams" element={<Teams />} />
-        <Route path="/Accepted" element={<Accepted />} />
-        <Route path="/Pending" element={<Pending />} />
-        <Route path="/edit/:id" element={<EditTeam />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Register" element={<Register />} />
-      </Routes>
-      <Footer />
-      </Provider>
-    </div >
+  const check=useSelector((state)=>state.auth);
+  const [loading,setLoading]=useState(true);
+  const dispatch=useDispatch();
+  const getTeam=async ()=>{
+    const token=window.localStorage.getItem("token");
+    if(token){
+     const res=await axios.get("http://localhost:8080/auth/getUser",{
+       headers:{
+         "authorization":token,
+       }
+     });
+     if(res.status<=300){
+       const {password,...curUser}=res.data;
+       dispatch(setLogin(true));
+       dispatch(setMyUser(curUser));
+     }
+    }
+    setLoading(false);
+  } 
+   useEffect(()=>{
+       getTeam();
+
+   },[])
+   return (
+      loading && !check.isLogin  ? 
+         <div>
+          Loading
+         </div>
+       : 
+       <div className="h-full w-full object-cover bg-slate-200">
+       <Navbar />
+       <Routes>
+         <Route path="/" element={<Home />} />
+         <Route path="/dashboard" element={<Dashboard />} />
+         <Route path="/create" element={<CreateTeam />} />
+         <Route path="/Teams" element={<Teams />} />
+         <Route path="/Accepted" element={<Accepted />} />
+         <Route path="/Pending" element={<Pending />} />
+         <Route path="/edit/:id" element={<EditTeam />} />
+         <Route path="/Login" element={<Login />} />
+         <Route path="/Register" element={<Register />} />
+       </Routes>
+       <Footer />
+     </div>
   );
 }
 

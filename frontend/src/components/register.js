@@ -10,6 +10,10 @@ const Register=()=>{
     const addUser = async (newUser) => {
         try {
           const res=await axios.post("http://localhost:8080/auth/register",newUser);
+          if(res.status===500){
+            console.log(res.data);
+            return;
+          }
           dispatch(setLogin(true));
           const {password,...curUser}=res.data.savedUser;
           dispatch(setMyUser(curUser));

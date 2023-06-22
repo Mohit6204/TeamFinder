@@ -1,15 +1,29 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setLogin, setMyUser } from "../store/authSlice";
 
 const Login=()=>{
+    const dispatch=useDispatch();
 
     const checkLogin = async (newUser)=>{
        try {
-
+         const res=await axios.post("http://localhost:8080/auth/login",newUser);
+         if(res.status===500){
+            console.log(res.data);
+            return;
+         }
+         dispatch(setLogin(true));
+         const {password,...curUser}=res.data.user;
+         dispatch(setMyUser(curUser));
+          window.localStorage.setItem("token",res.data.token);
+          console.log(curUser);
+          navigate("/");
 
         navigate("/");
        } catch (error) {
-         
+           console.log(error);
        }
     }
 
