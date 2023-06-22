@@ -15,10 +15,10 @@ import store from '../store/store';
 import { Provider } from 'react-redux';
 
 function App() {
-  
+   console.log("Mohit");
   return (
     <div className="h-full w-full object-cover bg-slate-200">
-    <Provider store={store}>
+      <Provider store={store}>
     <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -32,7 +32,7 @@ function App() {
         <Route path="/Register" element={<Register />} />
       </Routes>
       <Footer />
-    </Provider>
+      </Provider>
     </div >
   );
 }

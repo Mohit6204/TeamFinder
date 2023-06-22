@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import NavLinks from './navLinks';
 import Button from './button';
+import {useSelector } from 'react-redux/es/hooks/useSelector';
+
 function Navbartop() {
+  const check=useSelector((state)=>state.auth)
   const navigate=useNavigate();
+  console.log(check.isLogin);
   const [open,setOpen]=useState(false);
   return (
       <nav className='bg-white shadow-lg'>
@@ -26,12 +30,15 @@ function Navbartop() {
               <NavLinks />
             </ul>
             <div className='md:block hidden'>
-              <Button 
-                name="Login"
-              />
-               <Button 
-                name="Register"
-              />
+             {!check.isLogin ? (<>
+                            <Button 
+                            name="Login"
+                          />
+                           <Button 
+                            name="Register"
+                          />
+
+                    </>) :(<Button name="Logout"/>)}
             </div>
 
             {/* Mobile view */}
@@ -56,12 +63,15 @@ function Navbartop() {
               </li>
               <NavLinks />
               <div className='py-5'>
-              <Button 
-                name="Login"
-              />
-               <Button 
-                name="Register"
-              />
+              {!check.isLogin ? (<>
+                            <Button 
+                            name="Login"
+                          />
+                           <Button 
+                            name="Register"
+                          />
+
+                    </>) :(<Button name="Logout"/>)}
             </div>
             </ul>
 
