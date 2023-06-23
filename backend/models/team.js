@@ -6,6 +6,9 @@ const TeamSchema=new mongoose.Schema(
           type:String,
           required:true
        },
+       adminName:{
+         type:String,
+       },
        description:{
         type:String,
         required:true,

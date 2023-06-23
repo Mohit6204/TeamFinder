@@ -47,18 +47,22 @@ function App() {
           <Load />
          </div>
        : 
-       <div className="h-full w-full object-cover bg-slate-200">
+       <div className="h-full w-full object-cover bg-slate-100">
        <Navbar />
        <Routes>
          <Route path="/" element={<Home />} />
          <Route path="/dashboard" element={<Dashboard />} />
-         <Route path="/create" element={<CreateTeam />} />
+         <Route path="/Login" element={<Login />} />
+         <Route path="/Register" element={<Register />} />
+        {check.isLogin ? 
+          <><Route path="/create" element={<CreateTeam />} />
          <Route path="/Teams" element={<Teams />} />
          <Route path="/Accepted" element={<Accepted />} />
          <Route path="/Pending" element={<Pending />} />
-         <Route path="/edit/:id" element={<EditTeam />} />
-         <Route path="/Login" element={<Login />} />
-         <Route path="/Register" element={<Register />} />
+         <Route path="/edit/:id" element={<EditTeam />} /></>
+         : 
+         null
+         }
        </Routes>
        <Footer />
      </div>

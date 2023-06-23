@@ -17,7 +17,6 @@ function Navbartop() {
 
   const check=useSelector((state)=>state.auth)
   const navigate=useNavigate();
-  console.log(check.isLogin);
   const [open,setOpen]=useState(false);
   return (
       <nav className='bg-white shadow-lg'>
@@ -37,7 +36,7 @@ function Navbartop() {
                 <Link to="/dashboard">Dashboard</Link>
                 </div>
               </li>
-              <NavLinks />
+              {check.isLogin && <NavLinks />}
             </ul>
             <div className='md:block hidden'>
              {!check.isLogin ? (<>
@@ -71,7 +70,7 @@ function Navbartop() {
                   Dashboard
                 </div>
               </li>
-              <NavLinks />
+              {check.isLogin && <NavLinks />}
               <div className='py-5'>
               {!check.isLogin ? (<>
                             <Button 

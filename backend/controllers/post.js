@@ -30,10 +30,11 @@ export const myTeams=async (req,res)=>{
 export const createTeam=async (req,res)=>{
     try {
         const userId=req.user;
-        const newuser= await User.findById({userId});
+        const newuser= await User.findById(userId);
         const {description,title,intake}=req.body;
         const newpost= new Team({
             userId,
+            adminName:newuser.firstName+" "+newuser.lastName,
             description,
             title,
             intake,

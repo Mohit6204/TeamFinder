@@ -1,68 +1,74 @@
 import { useState } from "react";
-import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 function Createteam() {
-    
-     const addTeam = async (newTeam) => {
-          try {
-            await axios.post('http://localhost:3004/card', {
-              value: newTeam
+     const makeTeam = async (newTeam) => {
+         try {
+          const token=window.localStorage.getItem("token");
+            if(token){
+            const res=await axios.post("http://localhost:8080/post/create",newTeam,{
+               headers:{
+                    "authorization":token,
+               }
             });
-            setTeam({
-               title: "",
-               description: "",
-               number: 0
-          });
-          navigate('/dashboard');
-          } catch (error) {
-            console.log(error);
-          }
-        }
-
-     const navigate=useNavigate();
-     const [team, setTeam] = useState({
-          title: "",
-          description: "",
-          number: 0
-     })
-
-     function handlechange(event) {
-          const { name, value } = event.target;
-          setTeam(pr => {
-               return {
-                    ...pr,
-                    [name]: value
-               };
-          });
-     }
-
-     return (
-          <div className="team-create">
-               <div className="rform">
-                    <form>
-                         <h3>Add Team Details.</h3>
-                         <div>
-                              <label htmlFor="title">Title</label>
-                              <br></br>
-                              <input type="text" id="title" onChange={handlechange} name="title" value={team.title}></input>
-                         </div>
-                         <div>
-                              <label htmlFor="discription">Discription</label>
-                              <br></br>
-                              <textarea id="description" onChange={handlechange} name="description" value={team.description}></textarea>
-                         </div>
-                         <div>
-                              <label htmlFor="req">Number of Requirements</label>
-                              <br></br>
-                              <input type="number" id="req" onChange={handlechange} name="number" value={team.number}></input>
-                         </div>
-                         <br></br>
-                         <Button variant="primary" onClick={()=>{addTeam(team)}}>Submit</Button>
-                    </form>
-               </div>
-          </div>
-     );
+            if(res.status<=300){
+             console.group(res.data);
+            }
+            navigate("/dashboard");}
+            else{
+               console.log("Access Denied");
+            }
+         } catch (error) {
+           console.log(error);
+         }
+       }
+ 
+    const navigate=useNavigate();
+    const [team, setTeam] = useState({
+         title:"",
+         description:"",
+         intake:null,
+    });
+ 
+    function handlechange(event) {
+         const { name, value } = event.target;
+         setTeam(myTeam => {
+              return {
+                   ...myTeam,
+                   [name]: value
+              };
+         });
+    }
+ 
+ 
+ 
+     return(
+         <form>
+         <div className="bg-white my-[4%] md:mx-[25%] py-[5%] px-[5%] rounded-2xl shadow-md mx-10 ">
+            <div className=" flex justify-center text-2xl pb-2">
+                <h1 className=" font-bold text-2xl overflow-auto">Make Your Team Here</h1>
+            </div>
+            <div className=" flex justify-center py-4 flex-col w-full">
+                <label className=" pl-1 pb-2 text-slate-800" htmlFor="title">Title</label>
+                <input className=" border-2 rounded-lg px-2 overflow-auto w-full" type="text" id="title" name="title" value={team.title} placeholder="Title" required={true} onChange={handlechange}/>
+            </div>
+            <div className=" flex justify-center py-4 flex-col w-full">
+                <label className=" pl-1 pb-2 text-slate-800" htmlFor="description">Team Description</label>
+                <textarea style={{resize: 'none'}} className=" border-2 rounded-lg px-2 overflow-auto w-full" id="description" name="description" rows={4} value={team.description} required={true} onChange={handlechange}/>
+            </div>
+            <div className=" flex justify-center py-4 flex-col">
+                <label className=" pl-1 pb-2 text-slate-800" htmlFor="intake"> Required number of members</label>
+                <input className=" border-2 rounded-lg px-2 overflow-auto [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" type="number" id="intake" name="intake" value={team.intake} placeholder="Intake" required={true} onChange={handlechange}/>
+            </div>
+            <div className=" flex justify-center pt-4">
+                 <button className=" cursor-pointer rounded-full text-white bg-black px-8 py-1 hover:bg-black/80 overflow-auto text-xl" onClick={(e)=>{
+                     e.preventDefault();
+                     makeTeam(team);
+                 }}>Submit</button>
+            </div>
+         </div>
+         </form>
+     )
 }
 export default Createteam;

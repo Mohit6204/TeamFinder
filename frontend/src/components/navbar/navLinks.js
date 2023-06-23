@@ -37,7 +37,7 @@ function NavLinks(){
 
                             </div>
                         </div>
-                        <div className="bg-white p-3">
+                        <div className="bg-white p-3 rounded-md">
                             {link.sublinks.map((item)=>(
                               <li className="text-sm my-2.5">
                                 <Link to={`${item.link}`}>{item.head}</Link>
