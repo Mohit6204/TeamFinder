@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { setLogin, setMyUser } from '../store/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import Load from "./loading";
 
 
 function App() {
@@ -42,8 +43,8 @@ function App() {
    },[])
    return (
       loading && !check.isLogin  ? 
-         <div>
-          Loading
+         <div className="flex justify-center w-full h-full my-40 ">
+          <Load />
          </div>
        : 
        <div className="h-full w-full object-cover bg-slate-200">
