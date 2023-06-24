@@ -1,11 +1,27 @@
 import Team from "../models/team.js";
 import User from "../models/user.js";
 
-// Get all Teams
+// Get all Teams without login
 
 export const allTeams=async (req,res)=>{
     try {
         const teams=await Team.find();
+        res.status(200).json(teams)
+    } catch (error) {
+        res.status(404).json({error:error.message});
+    }
+}
+
+// Get all Teams with login
+
+export const getTeams=async (req,res)=>{
+    try {
+        const userId=req.user;
+        const myUser=await User.findById(userId);
+        const pending=myUser.pendingRequest;
+        const accepted=myUser.acceptedRequest;
+        const notInclude=[...pending,...accepted];
+        const teams=await Team.find({_id:{$nin:notInclude}});
         res.status(200).json(teams)
     } catch (error) {
         res.status(404).json({error:error.message});

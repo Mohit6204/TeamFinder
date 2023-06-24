@@ -1,5 +1,5 @@
 import express from "express";
-import { allTeams,myTeams,createTeam, deleteTeam, editTeam, viewTeam, edit} from "../controllers/post.js"
+import { allTeams,myTeams,createTeam, deleteTeam, editTeam, viewTeam, edit, getTeams} from "../controllers/post.js"
 import { verifyToken } from "../middleware/jwtAuth.js";
 
 const router=express.Router();
@@ -11,5 +11,6 @@ router.delete("/delete/:id",verifyToken,deleteTeam);
 router.patch("/editteam/:id",verifyToken,editTeam);
 router.get("/team/:id",verifyToken,viewTeam);
 router.get("/edit/:id",verifyToken,edit);
+router.get("getTeams",verifyToken,getTeams);
 
 export default router;
