@@ -20,7 +20,8 @@ export const getTeams=async (req,res)=>{
         const myUser=await User.findById(userId);
         const pending=myUser.pendingRequest;
         const accepted=myUser.acceptedRequest;
-        const notInclude=[...pending,...accepted];
+        const team=myUser.teams;
+        const notInclude=[...pending,...accepted,...team];
         const teams=await Team.find({_id:{$nin:notInclude},intake:{$gt:0}});
         res.status(200).json(teams)
     } catch (error) {
@@ -63,6 +64,7 @@ export const createTeam=async (req,res)=>{
         });
         const savedPost=await newpost.save();
         newuser.teams.push(savedPost);
+        newuser.save();
         res.status(201).json(savedPost);
     } catch (error) {
         res.status(500).json({error:error.message});
@@ -83,6 +85,7 @@ export const deleteTeam =async (req,res)=>{
         await promise.all(team.members.map(async (newId)=>{
             const newUser=await User.findById(newId);
             newUser.acceptedRequest.splice(newUser.acceptedRequest.indexOf(id),1);
+            newUser.save();
         }));
         const regUser=await User.findById(id);
         await promise.all(regUser.joinRequest.map(async (value,index)=>{
@@ -90,6 +93,8 @@ export const deleteTeam =async (req,res)=>{
                 const newUser=await User.findById(value.user);
                 newUser.pendingRequest.splice(newUser.pendingRequest.indexOf(id),1);
                 regUser.joinRequest.splice(index,1);
+                newUser.save();
+                regUser.save();
             }
         }));
         await Team.findByIdAndDelete(id);

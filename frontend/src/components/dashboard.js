@@ -18,10 +18,9 @@ function Dashboard() {
        };
       const getLoginTeams=async ()=>{
          try {
-            const token=window.localStorage.getItem("token");
             const res=await axios.get("http://localhost:8080/post/getTeams",{
                headers:{
-                  "authorization":token,
+                  "authorization":check.myToken,
                }
             });
             setMyTeam(res.data);

@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { useSelector } from "react-redux";
 
 function Createteam() {
+     const check=useSelector((state)=>state.auth);
      const makeTeam = async (newTeam) => {
          try {
-          const token=window.localStorage.getItem("token");
-            if(token){
+            if(check.myToken){
             const res=await axios.post("http://localhost:8080/post/create",newTeam,{
                headers:{
-                    "authorization":token,
+                    "authorization":check.myToken,
                }
             });
             if(res.status<=300){

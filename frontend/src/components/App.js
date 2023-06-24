@@ -12,7 +12,7 @@ import Login from './login';
 import Register from './register';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { setLogin, setMyUser } from '../store/authSlice';
+import { setLogin, setMyToken, setMyUser } from '../store/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Load from "./loading";
 import ApplyTeam from "./applyTeam";
@@ -34,6 +34,7 @@ function App() {
        const {password,...curUser}=res.data;
        dispatch(setLogin(true));
        dispatch(setMyUser(curUser));
+       dispatch(setMyToken(token));
      }
     }
     setLoading(false);

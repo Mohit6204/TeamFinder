@@ -59,6 +59,8 @@ export const applyTeam= async (req,res)=>{
         const regUser=await User.findById(team.userId);
         regUser.joinRequest.push({user:userId,message:message,teamId:id,team:{title:team.title,description:team.description},applicant:{name:newUser.firstName+" "+newUser.lastName,email:newUser.email,number:newUser.contactNumber}});
         newUser.pendingRequest.push(team.userId);
+        regUser.save();
+        newUser.save();
         res.status(200).json({newUser});
       } catch (error) {
         res.status(404).json({error:error.message});
@@ -81,6 +83,9 @@ export const confirmation= async (req,res)=>{
     }
     newUser.pendingRequest.splice(newUser.pendingRequest.indexOf(id),1);
     regUser.joinRequest.splice(regUser.joinRequest.indexOf({user:newId,message:message,teamId:id}),1);
+    team.save();
+    newUser.save();
+    regUser.save();
     res.status(200).json({team});
   } catch (error) {
     res.status(404).json({error:error.message});
