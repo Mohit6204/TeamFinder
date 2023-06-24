@@ -1,25 +1,62 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setApply } from "../store/mainSlice";
 function Dashboard() {
-
+   const dispatch=useDispatch();
+   const navigate=useNavigate();
+   const check=useSelector((state)=>state.auth);
     const [myTeam,setMyTeam]=useState([]);
      const getTeams= async()=>{
           try {
-               const res=await axios.get("http://localhost:8080/post/allteams");
+               const res=await axios.get("http://localhost:8080/post/allTeams");
                setMyTeam(res.data);
           } catch (error) {
                console.log(error);
           }
        };
+      const getLoginTeams=async ()=>{
+         try {
+            const token=window.localStorage.getItem("token");
+            const res=await axios.get("http://localhost:8080/post/getTeams",{
+               headers:{
+                  "authorization":token,
+               }
+            });
+            setMyTeam(res.data);
+       } catch (error) {
+            console.log(error);
+       }
+      }
 
      useEffect(()=>{
-       getTeams();
+       if(check.isLogin){
+         getLoginTeams();
+       }
+       else{
+         getTeams();
+       }
      },[]);
+
+     const handleApply= async(currTeam)=>{
+        try {
+           if(check.isLogin){
+             dispatch(setApply(currTeam));
+             navigate("/applyTeam")
+           }
+           else{
+             navigate("/Login")
+           }
+        } catch (error) {
+           console.log(error);
+        }
+     }
      return (
           <div className=" mx-auto py-36 px-8">
                 <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
                     {myTeam.map((team)=>(
-                         <div className="shadow-md rounded-lg bg-white m-6 hover:shadow-xl hover:m-5 duration-200">
+                         <div className="shadow-md rounded-lg bg-white m-6 hover:shadow-xl hover:m-5 duration-200 cursor-pointer" onClick={()=>handleApply(team)}>
                             <div className="py-2">
                                <h1 className=" flex justify-center text-xl font-semibold">{team.title}</h1>
                             </div>
@@ -27,12 +64,11 @@ function Dashboard() {
                                <p>{team.description}</p>
                             </div>
                             <div className="px-4 pb-3">
-                               <h1>Members Required - {team.intake}</h1>
+                               <h1>Members Required - {team.remaining}</h1>
                             </div>
                             <div className="px-4 pb-3">
                                <h1>Team Admin - {team.adminName}</h1>
                             </div>
-                            
                          </div>
 
                     ))}

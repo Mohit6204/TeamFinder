@@ -15,6 +15,7 @@ import axios from 'axios';
 import { setLogin, setMyUser } from '../store/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Load from "./loading";
+import ApplyTeam from "./applyTeam";
 
 
 function App() {
@@ -59,7 +60,9 @@ function App() {
          <Route path="/Teams" element={<Teams />} />
          <Route path="/Accepted" element={<Accepted />} />
          <Route path="/Pending" element={<Pending />} />
-         <Route path="/edit/:id" element={<EditTeam />} /></>
+         <Route path="/edit/:id" element={<EditTeam />} />
+         <Route path="/applyTeam" element={<ApplyTeam />} />
+         </>
          : 
          null
          }

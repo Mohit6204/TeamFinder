@@ -5,7 +5,7 @@ import User from "../models/user.js";
 
 export const allTeams=async (req,res)=>{
     try {
-        const teams=await Team.find();
+        const teams=await Team.find({intake:{$gt:0}});
         res.status(200).json(teams)
     } catch (error) {
         res.status(404).json({error:error.message});
@@ -21,7 +21,7 @@ export const getTeams=async (req,res)=>{
         const pending=myUser.pendingRequest;
         const accepted=myUser.acceptedRequest;
         const notInclude=[...pending,...accepted];
-        const teams=await Team.find({_id:{$nin:notInclude}});
+        const teams=await Team.find({_id:{$nin:notInclude},intake:{$gt:0}});
         res.status(200).json(teams)
     } catch (error) {
         res.status(404).json({error:error.message});
@@ -35,7 +35,11 @@ export const myTeams=async (req,res)=>{
         const userId=req.user;
         const newuser= await User.findById({userId});
         const teams=newuser.teams;
-        res.status(200).json(teams);
+        const currTeams=await promise.all(teams.map( async (team)=>{
+             newTeam=await Team.findById(team);
+             return newTeam;
+        }))
+        res.status(200).json(currTeams);
     } catch (error) {
         res.status(404).json({error:error.message});
     }

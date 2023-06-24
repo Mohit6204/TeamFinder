@@ -11,6 +11,6 @@ router.delete("/delete/:id",verifyToken,deleteTeam);
 router.patch("/editteam/:id",verifyToken,editTeam);
 router.get("/team/:id",verifyToken,viewTeam);
 router.get("/edit/:id",verifyToken,edit);
-router.get("getTeams",verifyToken,getTeams);
+router.get("/getTeams",verifyToken,getTeams);
 
 export default router;
