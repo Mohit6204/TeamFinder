@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setLogin,setMyUser } from "../store/authSlice";
+import { setLogin,setMyUser,setMyToken } from "../store/authSlice";
 import axios from "axios";
 
 const Register=()=>{
-
     const dispatch=useDispatch();
     const addUser = async (newUser) => {
         try {
@@ -18,7 +17,7 @@ const Register=()=>{
           const {password,...curUser}=res.data.savedUser;
           dispatch(setMyUser(curUser));
            window.localStorage.setItem("token",res.data.token);
-           console.log(curUser);
+           dispatch(setMyToken(res.data.token));
            navigate("/");
         } catch (error) {
           console.log(error);

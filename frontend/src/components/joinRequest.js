@@ -3,15 +3,15 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-function Pending() {
+function Join() {
     
      const navigate=useNavigate();
      const check=useSelector((state)=>state.auth);
      const [myTeam,setMyTeam]=useState([]);
 
-     const getpending=async ()=>{
+     const getjoin=async ()=>{
           try {
-             const res=await axios.get("http://localhost:8080/request/pending",{
+             const res=await axios.get("http://localhost:8080/request/join",{
                 headers:{
                    "authorization":check.myToken,
                 }
@@ -23,10 +23,10 @@ function Pending() {
         }
        }
        useEffect(()=>{
-          getpending();
+        getjoin();
         },[])
      return (
-          <h1>Pending Requests</h1>
+          <h1>Join Requests</h1>
      );
 }
-export default Pending;
+export default Join;

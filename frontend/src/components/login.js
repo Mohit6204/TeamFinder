@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setLogin, setMyUser } from "../store/authSlice";
+import { setLogin, setMyToken, setMyUser } from "../store/authSlice";
 
 const Login=()=>{
     const dispatch=useDispatch();
@@ -18,7 +18,7 @@ const Login=()=>{
          const {password,...curUser}=res.data.user;
          dispatch(setMyUser(curUser));
           window.localStorage.setItem("token",res.data.token);
-          console.log(curUser);
+          dispatch(setMyToken(res.data.token));
           navigate("/");
 
         navigate("/");

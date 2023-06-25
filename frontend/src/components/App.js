@@ -16,6 +16,9 @@ import { setLogin, setMyToken, setMyUser } from '../store/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Load from "./loading";
 import ApplyTeam from "./applyTeam";
+import MyTeams from "./myTeams";
+import ViewTeam from "./viewTeam";
+import Join from "./joinRequest";
 
 
 function App() {
@@ -63,6 +66,9 @@ function App() {
          <Route path="/Pending" element={<Pending />} />
          <Route path="/edit/:id" element={<EditTeam />} />
          <Route path="/applyTeam" element={<ApplyTeam />} />
+         <Route path="/myTeams" element={<MyTeams />} />
+         <Route path="/team/:id" element={<ViewTeam />} />
+         <Route path="/join" element={<Join />} />
          </>
          : 
          null

@@ -34,13 +34,9 @@ export const getTeams=async (req,res)=>{
 export const myTeams=async (req,res)=>{
     try {
         const userId=req.user;
-        const newuser= await User.findById({userId});
+        const newuser= await User.findById(userId);
         const teams=newuser.teams;
-        const currTeams=await promise.all(teams.map( async (team)=>{
-             newTeam=await Team.findById(team);
-             return newTeam;
-        }))
-        res.status(200).json(currTeams);
+        res.status(200).json(teams);
     } catch (error) {
         res.status(404).json({error:error.message});
     }
@@ -110,23 +106,16 @@ export const viewTeam = async (req,res)=>{
     try {
         const {id}=req.params;
         const team= await Team.findById(id);
-        const teamMembers=await promise.all(team.members.map(async (id)=>{
-             const newUser=await User.findById(id);
-             return{
-                firstName:newUser.firstName,
-                lastName:newUser.lastName,
-                email:newUser.email,
-             };
-        }));
         const regUser=await User.findById(team.userId);
         const finalTeam={
-            firstName:regUser.firstName,
-            lastName:regUser.lastName,
-            email:regUser.email,
-            description:team.description,
             title:team.title,
+            description:team.description,
             intake:team.intake,
-            members:teamMembers,
+            remaining:team.remaining,
+            members:team.members,
+            name:team.adminName,
+            contactNumber:regUser.contactNumber,
+            email:regUser.email,
         };
         res.status(200).json(finalTeam);
     } catch (error) {

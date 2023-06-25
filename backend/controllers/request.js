@@ -8,11 +8,7 @@ export const pendingRequest= async (req,res)=>{
     const userId=req.user;
     const newUser=await User.findById(userId);
     const pending=newUser.pendingRequest;
-    const penfingTeams=await promise.all(pending.map( async (team)=>{
-      newTeam=await Team.findById(team);
-      return newTeam;
- }))
-    res.status(200).json(penfingTeams);
+    res.status(200).json(pending);
   } catch (error) {
     res.status(404).json({error:error.message});
   }
@@ -58,7 +54,7 @@ export const applyTeam= async (req,res)=>{
         const team=await Team.findById(id);
         const regUser=await User.findById(team.userId);
         regUser.joinRequest.push({user:userId,message:message,teamId:id,team:{title:team.title,description:team.description},applicant:{name:newUser.firstName+" "+newUser.lastName,email:newUser.email,number:newUser.contactNumber}});
-        newUser.pendingRequest.push(team.userId);
+        newUser.pendingRequest.push({_id:id,message:message});
         regUser.save();
         newUser.save();
         res.status(200).json({newUser});

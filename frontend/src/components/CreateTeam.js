@@ -13,9 +13,6 @@ function Createteam() {
                     "authorization":check.myToken,
                }
             });
-            if(res.status<=300){
-             console.group(res.data);
-            }
             navigate("/dashboard");}
             else{
                console.log("Access Denied");

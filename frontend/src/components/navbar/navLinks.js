@@ -5,8 +5,8 @@ function NavLinks(){
         {head:"Pending", link:'/Pending'},
         {head:"Accepted", link:'/Accepted'}
     ]},{name:"My Teams",sublinks:[
-        {head:"All Teams", link:'/allTeams'},
-        {head:"Join Requests", link:'/joinRequest'},
+        {head:"All Teams", link:'/myTeams'},
+        {head:"Join Requests", link:'/join'},
         {head:"Create Team", link:'/create'}]}]
    
         const [heading,setHeading]=useState('');
