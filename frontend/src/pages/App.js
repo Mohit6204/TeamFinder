@@ -1,6 +1,6 @@
-import Navbar from "./navbar/navbar";
+import Navbar from "../components/navbar/navbar";
 import CreateTeam from "./CreateTeam";
-import Footer from "./Footer";
+import Footer from "../components/footer/Footer";
 import Accepted from "./accepted";
 import Pending from "./pending";
 import { Routes, Route } from "react-router-dom";
