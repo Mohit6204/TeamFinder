@@ -28,8 +28,8 @@ export const register=async (req,res)=>{
         });
         const savedUser=await newUser.save();
         const token=jwt.sign({id:newUser._id},process.env.JWT_SECRET);
-        delete newUser.password;
-        res.status(201).json({token,savedUser});
+        const curUser={_id,firstName,lastName,contactNumber,email};
+        res.status(201).json({token,curUser});
 
     } catch (error) {
         res.status(500).json({error:error.message});
@@ -48,8 +48,9 @@ export const login = async (req,res)=>{
         if(!isMatch) return res.status(400).json({message:"Invalid Credentials."}) 
 
         const token=jwt.sign({id:user._id},process.env.JWT_SECRET);
-        delete user.password;
-        res.status(200).json({token,user});
+        const {_id,firstName,lastName,contactNumber}=user;
+        const curUser={_id,firstName,lastName,contactNumber,email}
+        res.status(200).json({token,curUser});
 
     } catch (error) {
         res.status(500).json({error:error.message});
@@ -62,7 +63,8 @@ export const getUser=async (req,res)=>{
     try {
         const user_ID=req.user;
         const user=await User.findById(user_ID);
-        const {password,...curUser}=user;
+        const {_id,firstName,lastName,contactNumber,email}=user;
+        const curUser={_id,firstName,lastName,contactNumber,email}
         res.status(200).json(curUser);
 
     } catch (error) {

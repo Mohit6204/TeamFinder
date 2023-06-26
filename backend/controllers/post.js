@@ -108,6 +108,7 @@ export const viewTeam = async (req,res)=>{
         const team= await Team.findById(id);
         const regUser=await User.findById(team.userId);
         const finalTeam={
+            userId:team.userId,
             title:team.title,
             description:team.description,
             intake:team.intake,

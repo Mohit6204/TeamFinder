@@ -7,8 +7,18 @@ export const pendingRequest= async (req,res)=>{
   try {
     const userId=req.user;
     const newUser=await User.findById(userId);
-    const pending=newUser.pendingRequest;
-    res.status(200).json(pending);
+    const response=await Promise.all(newUser.pendingRequest.map( async (val)=>{
+         const team=await Team.findById(val.id);
+         const value={
+          title:team.title,
+          description:team.description,
+          id:team._id,
+          size:team.intake,
+          message:val.message,
+         }
+         return value;
+    }))
+    res.status(200).json(response);
   } catch (error) {
     res.status(404).json({error:error.message});
   }
@@ -20,12 +30,17 @@ export const acceptedRequest= async (req,res)=>{
     try {
         const userId=req.user;
         const newUser=await User.findById(userId);
-        const accepted=newUser.acceptedRequest;
-        const acceptedTeams=await promise.all(accepted.map( async (team)=>{
-          newTeam=await Team.findById(team);
-          return newTeam;
+        const response=await Promise.all(newUser.acceptedRequest.map( async (Id)=>{
+          const team=await Team.findById(Id);
+          const value={
+           title:team.title,
+           description:team.description,
+           id:team._id,
+           size:team.intake,
+          }
+          return value;
      }))
-        res.status(200).json(acceptedTeams);
+        res.status(200).json(response);
       } catch (error) {
         res.status(404).json({error:error.message});
       }
@@ -37,8 +52,23 @@ export const joinRequest= async (req,res)=>{
     try {
         const userId=req.user;
         const newUser=await User.findById(userId);
-        const join=newUser.joinRequest;
-        res.status(200).json(join);
+        const response=await Promise.all(newUser.joinRequest.map( async (val)=>{
+          const team=await Team.findById(val.team_id);
+          const regUser=await User.findById(val.user_id);
+          const value={
+           title:team.title,
+           description:team.description,
+           team_id:team._id,
+           size:team.intake,
+           message:val.message,
+           name:regUser.firstName+" "+regUser.lastName,
+           email:regUser.email,
+           contactNumber:regUser.contactNumber,
+           user_id:val.user_id,
+          }
+          return value;
+     }))
+        res.status(200).json(response);
       } catch (error) {
         res.status(404).json({error:error.message});
       }
@@ -53,8 +83,8 @@ export const applyTeam= async (req,res)=>{
         const {id,message}=req.body;
         const team=await Team.findById(id);
         const regUser=await User.findById(team.userId);
-        regUser.joinRequest.push({user:userId,message:message,teamId:id,team:{title:team.title,description:team.description},applicant:{name:newUser.firstName+" "+newUser.lastName,email:newUser.email,number:newUser.contactNumber}});
-        newUser.pendingRequest.push({_id:id,message:message});
+        regUser.joinRequest.push({team_id:id,user_id:userId,message:message});
+        newUser.pendingRequest.push({id:id,message:message});
         regUser.save();
         newUser.save();
         res.status(200).json({newUser});
@@ -69,16 +99,19 @@ export const confirmation= async (req,res)=>{
   try {
     const userId=req.user;
     const regUser=await User.findById(userId);
-    const {id,isConfirmed,message,newId}=req.body;
-    const team=await Team.findById(id);
-    const newUser=await User.findById(newId);
-    if(isConfirmed){
-      newUser.acceptedRequest.push(id);
-      team.members.push(newId);
-      team.intake=team.intake-1;
+    const {team_id,isConfirmed,user_id}=req.body;
+    const team=await Team.findById(team_id);
+    if(userId!==team.userId){
+      res.status(403).json("Accsess Denied!!");
     }
-    newUser.pendingRequest.splice(newUser.pendingRequest.indexOf(id),1);
-    regUser.joinRequest.splice(regUser.joinRequest.indexOf({user:newId,message:message,teamId:id}),1);
+    const newUser=await User.findById(user_id);
+    if(isConfirmed){
+      team.members.push({id:user_id});
+      team.intake=team.intake-1;
+      newUser.acceptedRequest.push({id:team_id});
+    }
+      newUser.pendingRequest = newUser.pendingRequest.filter((request) => request.id !== id);
+      regUser.joinRequest = regUser.joinRequest.filter((request) => request.team_id !== id );
     team.save();
     newUser.save();
     regUser.save();

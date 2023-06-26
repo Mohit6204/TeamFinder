@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ViewTeam = () => {
+    const navigate=useNavigate();
     const check = useSelector((state) => state.auth);
     const { id } = useParams();
     const [team, setTeam] = useState({});
@@ -22,6 +23,27 @@ const ViewTeam = () => {
     useEffect(() => {
         getMyTeam();
     }, [])
+
+    const handleDelete = async ()=>{
+        try {
+            const res = await axios.delete(`http://localhost:8080/post/delete/${id}`, {
+                    headers: {
+                        "authorization": check.myToken,
+                    }
+                });
+                console.log(res);
+            // navigate("/myTeams");
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const handleLeave= async ()=>{
+        try {
+            navigate("/Accepted");
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
             <>
                 <div className="shadow-md rounded-lg bg-white m-6 flex flex-row">
@@ -32,8 +54,17 @@ const ViewTeam = () => {
                         <div className="px-4 pb-3">
                             <h1>Members Required - {team.remaining}</h1>
                         </div>
-                        <div className="px-4">
-                            <h1>Team Admin - {team.name}</h1>
+                        <div className="px-4 flex justify-between">
+                            <div className="flex">
+                              <h1>Team Admin - {team.name}</h1>
+                            </div>
+                            <div className="flex py-2">
+                            {
+                                check.myUser._id===team.userId ? 
+                                <div className=" border-2 rounded-xl px-2 py-1 font-sans font-semibold hover:bg-black/80 hover:text-white cursor-pointer transition-all" onClick={()=>handleDelete()}>Delete<span><ion-icon name="trash"></ion-icon></span></div>
+                                : <div className=" border-2 rounded-xl px-2 py-1 font-sans font-semibold hover:bg-black/80 hover:text-white cursor-pointer transition-all" onClick={()=>handleLeave()}>Leave Team<span><ion-icon name="exit-outline"></ion-icon></span></div>
+                            }
+                             </div>
                         </div>
                     </div>
                     <div className="flex flex-col w-1/2">

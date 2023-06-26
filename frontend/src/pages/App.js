@@ -5,7 +5,6 @@ import Accepted from "./accepted";
 import Pending from "./pending";
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./dashboard";
-import Teams from "./teams";
 import EditTeam from "./editteam";
 import Home from './home';
 import Login from './login';
@@ -61,7 +60,6 @@ function App() {
          <Route path="/Register" element={<Register />} />
         {check.isLogin ? 
           <><Route path="/create" element={<CreateTeam />} />
-         <Route path="/Teams" element={<Teams />} />
          <Route path="/Accepted" element={<Accepted />} />
          <Route path="/Pending" element={<Pending />} />
          <Route path="/edit/:id" element={<EditTeam />} />
