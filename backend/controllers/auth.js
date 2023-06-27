@@ -15,7 +15,6 @@ export const register=async (req,res)=>{
 
         const salt=await bcrypt.genSalt();
         const passwordHash=await bcrypt.hash(password,salt);
-
         const newUser=new User({
             firstName,
             lastName,
@@ -24,11 +23,12 @@ export const register=async (req,res)=>{
             password:passwordHash,
             teams:[],
             pendingRequest:[],
-            acceptedRequest:[]
+            acceptedRequest:[],
         });
-        const savedUser=await newUser.save();
-        const token=jwt.sign({id:newUser._id},process.env.JWT_SECRET);
+        const savedUser = await newUser.save();
+        const {_id}=savedUser;
         const curUser={_id,firstName,lastName,contactNumber,email};
+        const token=jwt.sign({id:_id},process.env.JWT_SECRET);
         res.status(201).json({token,curUser});
 
     } catch (error) {

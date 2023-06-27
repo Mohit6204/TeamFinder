@@ -43,9 +43,6 @@ function Navbartop() {
                             <Button 
                             name="Login"
                           />
-                           <Button 
-                            name="Register"
-                          />
 
                     </>) :(<div onClick={()=>handleLogout()}><Button name="Logout"/></div>)}
             </div>
@@ -75,9 +72,6 @@ function Navbartop() {
               {!check.isLogin ? (<>
                             <Button 
                             name="Login"
-                          />
-                           <Button 
-                            name="Register"
                           />
 
                     </>) :(<div onClick={()=>handleLogout()}><Button name="Logout"/></div>)}

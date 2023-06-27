@@ -13,7 +13,7 @@ function Createteam() {
                     "authorization":check.myToken,
                }
             });
-            navigate("/dashboard");}
+            navigate("/myTeams");}
             else{
                console.log("Access Denied");
             }

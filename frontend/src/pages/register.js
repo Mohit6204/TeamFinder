@@ -13,9 +13,9 @@ const Register=()=>{
             console.log(res.data);
             return;
           }
+          console.log(res.data);
           dispatch(setLogin(true));
-          const {password,...curUser}=res.data.savedUser;
-          dispatch(setMyUser(curUser));
+          dispatch(setMyUser(res.data.curUser));
            window.localStorage.setItem("token",res.data.token);
            dispatch(setMyToken(res.data.token));
            navigate("/");
@@ -80,6 +80,9 @@ const Register=()=>{
                     addUser(User);
                 }}>Submit</button>
            </div>
+           <div className=" flex justify-center pt-6" >
+            <h1 className=" hover:text-blue-700 cursor-pointer" onClick={()=>navigate("/Login")}>Already have an Account</h1>
+        </div>
         </div>
         </form>
     )

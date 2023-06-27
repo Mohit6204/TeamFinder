@@ -15,8 +15,7 @@ const Login=()=>{
             return;
          }
          dispatch(setLogin(true));
-         const {password,...curUser}=res.data.user;
-         dispatch(setMyUser(curUser));
+         dispatch(setMyUser(res.data.curUser));
           window.localStorage.setItem("token",res.data.token);
           dispatch(setMyToken(res.data.token));
           navigate("/");
@@ -62,6 +61,9 @@ const Login=()=>{
                 e.preventDefault();
                 checkLogin(User);
              }}>Submit</button>
+        </div>
+        <div className=" flex justify-center pt-6" >
+            <h1 className=" hover:text-blue-700 cursor-pointer" onClick={()=>navigate("/Register")}>Don't have an Account?</h1>
         </div>
      </div>
      </form>

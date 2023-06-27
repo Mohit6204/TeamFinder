@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import Load from "./loading";
 
 const ViewTeam = () => {
     const navigate=useNavigate();
@@ -24,18 +25,20 @@ const ViewTeam = () => {
         getMyTeam();
     }, [])
 
-    const handleDelete = async ()=>{
+    const deleteTeam = async ()=>{
         try {
             const res = await axios.delete(`http://localhost:8080/post/delete/${id}`, {
                     headers: {
                         "authorization": check.myToken,
                     }
                 });
-                console.log(res);
-            // navigate("/myTeams");
         } catch (error) {
             console.log(error);
         }
+    }
+    const handleDelete=()=>{
+        deleteTeam();
+        navigate("/dashboard");
     }
     const handleLeave= async ()=>{
         try {
@@ -83,9 +86,9 @@ const ViewTeam = () => {
                     <div className=" flex justify-center text-xl font-semibold py-2">
                         <h1>Members</h1>
                     </div>
-                    <div>
-
-                    </div>
+                    {team.members&&team.members.map((member)=>(
+                        <h1>{member.name}</h1>
+                    ))}
                 </div>
                 </>
     )

@@ -63,7 +63,7 @@ function App() {
          <Route path="/Accepted" element={<Accepted />} />
          <Route path="/Pending" element={<Pending />} />
          <Route path="/edit/:id" element={<EditTeam />} />
-         <Route path="/applyTeam" element={<ApplyTeam />} />
+         <Route path="/applyTeam/:id" element={<ApplyTeam />} />
          <Route path="/myTeams" element={<MyTeams />} />
          <Route path="/team/:id" element={<ViewTeam />} />
          <Route path="/join" element={<Join />} />

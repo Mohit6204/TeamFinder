@@ -8,8 +8,9 @@ export const pendingRequest= async (req,res)=>{
     const userId=req.user;
     const newUser=await User.findById(userId);
     const response=await Promise.all(newUser.pendingRequest.map( async (val)=>{
-         const team=await Team.findById(val.id);
+         const team=await Team.findById(val._id);
          const value={
+          adminName:team.adminName,
           title:team.title,
           description:team.description,
           id:team._id,
@@ -84,7 +85,7 @@ export const applyTeam= async (req,res)=>{
         const team=await Team.findById(id);
         const regUser=await User.findById(team.userId);
         regUser.joinRequest.push({team_id:id,user_id:userId,message:message});
-        newUser.pendingRequest.push({id:id,message:message});
+        newUser.pendingRequest.push({_id:id,message:message});
         regUser.save();
         newUser.save();
         res.status(200).json({newUser});
@@ -106,17 +107,99 @@ export const confirmation= async (req,res)=>{
     }
     const newUser=await User.findById(user_id);
     if(isConfirmed){
-      team.members.push({id:user_id});
+      team.members.push({_id:user_id});
       team.intake=team.intake-1;
-      newUser.acceptedRequest.push({id:team_id});
+      newUser.acceptedRequest.push({_id:team_id});
     }
-      newUser.pendingRequest = newUser.pendingRequest.filter((request) => request.id !== id);
-      regUser.joinRequest = regUser.joinRequest.filter((request) => request.team_id !== id );
+      newUser.pendingRequest = newUser.pendingRequest.filter((request) => request._id.toString() !== team_id);
+      regUser.joinRequest = regUser.joinRequest.filter((request) => request.team_id.toString() !== team_id );
     team.save();
     newUser.save();
     regUser.save();
-    res.status(200).json({team});
+
+    const response=await Promise.all(regUser.joinRequest.map( async (val)=>{
+      const team=await Team.findById(val.team_id);
+      const myUser=await User.findById(val.user_id);
+      const value={
+       title:team.title,
+       description:team.description,
+       team_id:team._id,
+       size:team.intake,
+       message:val.message,
+       name:myUser.firstName+" "+myUser.lastName,
+       email:myUser.email,
+       contactNumber:myUser.contactNumber,
+       user_id:val.user_id,
+      }
+      return value;
+ }))
+    res.status(200).json(response);
   } catch (error) {
     res.status(404).json({error:error.message});
   }
 };
+
+// Cancel a Pending Request
+
+export const cancelReq = async(req,res)=>{
+  try {
+    const user= await User.findById(req.user);
+    const {id}=req.params;
+    const team= await Team.findById(id);
+    const regUser=await User.findById(team.userId);
+    user.pendingRequest = user.pendingRequest.filter((request) => request._id.toString() !== id);
+    regUser.joinRequest = regUser.joinRequest.filter((request) => request.team_id.toString() !== id );
+    await user.save();
+    await regUser.save();
+    const response=await Promise.all(user.pendingRequest.map( async (val)=>{
+      const team=await Team.findById(val._id);
+      const value={
+       adminName:team.adminName,
+       title:team.title,
+       description:team.description,
+       id:team._id,
+       size:team.intake,
+       message:val.message,
+      }
+      return value;
+ }))
+ res.status(200).json(response);
+  } catch (error) {
+    res.status(404).json({error:error.message});
+  }
+};
+
+//get a Team for apply
+
+export const getTeam= async (req,res)=>{
+  try {
+    const {id}=req.params;
+    const team= await Team.findById(id);
+    let isPending=false;
+    let message="";
+    const regUser=await User.findById(team.userId);
+    regUser.joinRequest.map((value)=>{
+         if(value.team_id===id){
+           isPending=true;
+           message=value.message;
+         }
+    });
+    const finalTeam={
+        teamId:team._id,
+        userId:team.userId,
+        title:team.title,
+        description:team.description,
+        intake:team.intake,
+        remaining:team.remaining,
+        isPending:isPending,
+        message:message,
+        name:team.adminName,
+        contactNumber:regUser.contactNumber,
+        email:regUser.email,
+    };
+    res.status(200).json(finalTeam);
+} catch (error) {
+    res.status(404).json({error:error.message});
+}
+}
+
