@@ -203,3 +203,44 @@ export const getTeam= async (req,res)=>{
 }
 }
 
+// Delete a team member
+
+export const deleteMember = async(req,res)=>{
+  try {
+      const {id,user_id}=req.params;
+      const team=await Team.findById(id);
+      const user=await User.findById(user_id);
+
+      user.acceptedRequest = user.acceptedRequest.filter((request) => request._id.toString() !== id);
+      team.members = team.members.filter((request) => request._id.toString() !== user_id);
+      await user.save();
+      await team.save();
+
+      const myMembers=await Promise.all(team.members.map(async (id)=>{
+          const newUser=await User.findById(id);
+          const finalUser={
+              name:newUser.firstName+" "+newUser.lastName,
+              contactNumber:newUser.contactNumber,
+              email:newUser.email,
+              id:newUser._id,
+          }
+          return finalUser;
+      }))
+      const regUser=await User.findById(team.userId);
+      const finalTeam={
+          teamId:team._id,
+          userId:team.userId,
+          title:team.title,
+          description:team.description,
+          intake:team.intake,
+          remaining:team.remaining,
+          members:myMembers,
+          name:team.adminName,
+          contactNumber:regUser.contactNumber,
+          email:regUser.email,
+      };
+      res.status(200).json(finalTeam);
+  } catch (error) {
+    res.status(404).json({error:error.message});
+  }
+}

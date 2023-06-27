@@ -5,7 +5,7 @@ import Accepted from "./accepted";
 import Pending from "./pending";
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./dashboard";
-import EditTeam from "./editteam";
+import EditTeam from "./editTeam";
 import Home from './home';
 import Login from './login';
 import Register from './register';

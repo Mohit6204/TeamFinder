@@ -22,7 +22,6 @@ export const getTeams=async (req,res)=>{
         const accepted=myUser.acceptedRequest;
         const team=myUser.teams;
         const notInclude=[...pending,...accepted,...team];
-        console.log(notInclude);
         const teams=await Team.find({_id:{$nin:notInclude},intake:{$gt:0}});
         res.status(200).json(teams)
     } catch (error) {
@@ -118,6 +117,7 @@ export const viewTeam = async (req,res)=>{
                 name:newUser.firstName+" "+newUser.lastName,
                 contactNumber:newUser.contactNumber,
                 email:newUser.email,
+                id:newUser._id,
             }
             return finalUser;
         }))
@@ -146,7 +146,9 @@ export const edit = async (req,res)=>{
     try {
        const {id}=req.params;
        const newTeam=await Team.findById(id);
-       res.status(200).json(newTeam);
+       const{title,description,intake}=newTeam;
+       const response={title,description,intake}
+       res.status(200).json(response);
     } catch (error) {
         res.status(404).json({error:error.message});
     }
@@ -157,14 +159,16 @@ export const edit = async (req,res)=>{
 export const editTeam = async (req,res)=>{
     try {
        const {id}=req.params;
-       const regTeam=await findById(id);
+       const regTeam=await Team.findById(id);
        if(req.user!==regTeam.userId){
         res.status(403).json("Access Denied!!");
         return;
        }
-       const {newTeam}=req.body;
-       const team=await findbyIdAndUpdate(id,{...newTeam});
-       res.status(200).json(team);
+       const newTeam=req.body;
+       const team=await Team.findByIdAndUpdate(regTeam._id,newTeam);
+       await team.save();
+       console.log(team);
+       res.status(200);
     } catch (error) {
         res.status(500).json({error:error.message});
     }

@@ -25,8 +25,36 @@ function Accepted() {
        useEffect(()=>{
           getAccepted();
         },[])
+
+        const handleView=(team)=>{
+          try {
+              navigate(`/team/${team.id}`)
+          } catch (error) {
+              
+          }
+       }
+
      return (
-          <h1>Accepted Requests</h1>
+          <>
+          <div className=" mx-auto py-36 px-8">
+         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
+             {myTeam.map((team)=>(
+                  <div className="shadow-md rounded-lg bg-white m-6 hover:shadow-xl hover:m-5 duration-200 cursor-pointer" onClick={()=>handleView(team)}>
+                     <div className="py-2">
+                        <h1 className=" flex justify-center text-xl font-semibold">{team.title}</h1>
+                     </div>
+                     <div className="px-4 pb-3">
+                        <p>{team.description}</p>
+                     </div>
+                     <div className="px-4 pb-3">
+                        <h1>Team Size - {team.size}</h1>
+                     </div>
+                  </div>
+
+             ))}
+         </div>
+   </div>
+</>
      );
 }
 export default Accepted;

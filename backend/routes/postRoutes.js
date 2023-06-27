@@ -8,9 +8,10 @@ router.post("/create",verifyToken,createTeam);
 router.get("/allteams",allTeams);
 router.get("/myteams",verifyToken,myTeams);
 router.delete("/delete/:id",verifyToken,deleteTeam);
-router.patch("/editteam/:id",verifyToken,editTeam);
+router.patch("/editTeam/:id",verifyToken,editTeam);
 router.get("/team/:id",verifyToken,viewTeam);
 router.get("/edit/:id",verifyToken,edit);
 router.get("/getTeams",verifyToken,getTeams);
+
 
 export default router;
