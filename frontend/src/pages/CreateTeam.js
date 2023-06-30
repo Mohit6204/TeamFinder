@@ -27,6 +27,7 @@ function Createteam() {
          title:"",
          description:"",
          intake:null,
+         skillRequired:"",
     });
  
     function handlechange(event) {
@@ -55,6 +56,10 @@ function Createteam() {
                 <label className=" pl-1 pb-2 text-slate-800" htmlFor="description">Team Description</label>
                 <textarea style={{resize: 'none'}} className=" border-2 rounded-lg px-2 overflow-auto w-full" id="description" name="description" rows={4} value={team.description} required={true} onChange={handlechange}/>
             </div>
+            <div className=" flex justify-center py-4 flex-col w-full">
+               <label className=" pl-1 pb-2 text-slate-800" htmlFor="skillRequired">Skills Required</label>
+               <textarea style={{resize: 'none'}} className=" border-2 rounded-lg px-2 overflow-auto w-full" rows={3} id="skillRequired" name="skillRequired" value={team.skillRequired} placeholder="Specify skills and use space in between.." required={true} onChange={handlechange}/>
+           </div>
             <div className=" flex justify-center py-4 flex-col">
                 <label className=" pl-1 pb-2 text-slate-800" htmlFor="intake"> Required number of members</label>
                 <input className=" border-2 rounded-lg px-2 overflow-auto [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" type="number" id="intake" name="intake" value={team.intake} placeholder="Intake" required={true} onChange={handlechange}/>

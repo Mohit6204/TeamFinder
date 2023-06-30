@@ -2,12 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Load from "../components/loading";
 
 function Join() {
     
      const navigate=useNavigate();
      const check=useSelector((state)=>state.auth);
      const [myTeam,setMyTeam]=useState([]);
+     const [loading,setLoading]=useState(true);
 
      const getjoin=async ()=>{
           try {
@@ -16,10 +18,12 @@ function Join() {
                    "authorization":check.myToken,
                 }
              });
-             console.log(res.data);
+             
              setMyTeam(res.data);
+             setLoading(false);
         } catch (error) {
              console.log(error);
+              setLoading(false);            
         }
        }
        useEffect(()=>{
@@ -40,19 +44,25 @@ function Join() {
           }
         }
      return (
-          <>
+           loading ? <>
+           <div className="flex justify-center w-full h-full my-40 ">
+     <Load />
+    </div>
+           </> :           <>
           <div className=" flex my-4 flex-col mt-10 ">
            {myTeam.map((team)=>(
                <div className="flex bg-white my-2 mx-4 rounded-lg px-4 py-2 flex-row justify-between shadow-md">
                   <div>
                     <h1>Title - {team.title}</h1>
                     <h2>Team Size - {team.size}</h2>
+                    <h3>Skills Required - {team.skillRequired}</h3>
                     <h3>Message from the User - {team.message}</h3>
                     <h1 className="text-xl justify-center">Requested By </h1>
                     <div className="py-2 text-center border-2 rounded-lg">
                          <h1>Name - {team.name}</h1>
                          <h2>Contact Number - {team.contactNumber}</h2>
                          <h2>Email - {team.email}</h2>
+                         <h3>Skills - {team.skill}</h3>
                     </div>
                   </div>
                    <div className=" flex flex-col justify-between py-2">

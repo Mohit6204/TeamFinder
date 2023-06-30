@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios';
 import { useSelector } from "react-redux";
+import Load from "../components/loading";
 
 function EditTeam() {
      const {id}=useParams();
      const check=useSelector((state)=>state.auth);
+     const [loading,setLoading]=useState(true);
      const saveChanges = async (newTeam) => {
          try {
             if(check.myToken){
@@ -43,9 +45,11 @@ function EditTeam() {
                     "authorization":check.myToken,
                }
             });
+            setLoading(false);
           setTeam(res.data);
      } catch (error) {
           console.log(error);
+          setLoading(false);
      }
     }
     useEffect(()=>{
@@ -53,7 +57,12 @@ function EditTeam() {
     },[])
  
      return(
-         <form>
+        loading ? <>
+        <div className="flex justify-center w-full h-full my-40 ">
+     <Load />
+    </div>
+        </> : <>
+        <form>
          <div className="bg-white my-[4%] md:mx-[25%] py-[5%] px-[5%] rounded-2xl shadow-md mx-10 ">
             <div className=" flex justify-center text-2xl pb-2">
                 <h1 className=" font-bold text-2xl overflow-auto">Edit Your Team</h1>
@@ -66,6 +75,10 @@ function EditTeam() {
                 <label className=" pl-1 pb-2 text-slate-800" htmlFor="description">Team Description</label>
                 <textarea style={{resize: 'none'}} className=" border-2 rounded-lg px-2 overflow-auto w-full" id="description" name="description" rows={4} value={team.description} required={true} onChange={handlechange}/>
             </div>
+            <div className=" flex justify-center py-4 flex-col w-full">
+               <label className=" pl-1 pb-2 text-slate-800" htmlFor="skillRequired">Skills Required</label>
+               <textarea style={{resize: 'none'}} className=" border-2 rounded-lg px-2 overflow-auto w-full" rows={3} id="skillRequired" name="skillRequired" value={team.skillRequired} placeholder="Specify skills and use space in between.." required={true} onChange={handlechange}/>
+           </div>
             <div className=" flex justify-center py-4 flex-col">
                 <label className=" pl-1 pb-2 text-slate-800" htmlFor="intake"> Required number of members</label>
                 <input className=" border-2 rounded-lg px-2 overflow-auto [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" type="number" id="intake" name="intake" value={team.intake} placeholder="Intake" required={true} onChange={handlechange}/>
@@ -79,6 +92,7 @@ function EditTeam() {
             </div>
          </div>
          </form>
+        </>
      )
 }
 export default EditTeam;

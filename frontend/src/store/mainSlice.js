@@ -3,14 +3,18 @@ import { createSlice} from "@reduxjs/toolkit";
 const mainSlice = createSlice({
     name:'main',
     initialState:{
-         apply:null,
+         open:false,
+         heading:"",
     },
     reducers:{
-      setApply(state,action){
-        state.apply=action.payload;
+      setOpen(state,action){
+        state.open=action.payload;
       },
+      setHeading(state,action){
+        state.heading=action.payload;
+      }
     },
 });
 
-export const {setApply}=mainSlice.actions;
+export const {setOpen,setHeading}=mainSlice.actions;
 export default mainSlice.reducer;

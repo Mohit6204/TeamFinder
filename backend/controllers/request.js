@@ -38,6 +38,7 @@ export const acceptedRequest= async (req,res)=>{
            description:team.description,
            id:team._id,
            size:team.intake,
+           adminName:team.adminName,
           }
           return value;
      }))
@@ -59,12 +60,14 @@ export const joinRequest= async (req,res)=>{
           const value={
            title:team.title,
            description:team.description,
+           skillRequired:team.skillRequired,
            team_id:team._id,
            size:team.intake,
            message:val.message,
            name:regUser.firstName+" "+regUser.lastName,
            email:regUser.email,
            contactNumber:regUser.contactNumber,
+           skill:regUser.skills,
            user_id:val.user_id,
           }
           return value;
@@ -108,7 +111,7 @@ export const confirmation= async (req,res)=>{
     const newUser=await User.findById(user_id);
     if(isConfirmed){
       team.members.push({_id:user_id});
-      team.intake=team.intake-1;
+      team.remaining=team.remaining-1;
       newUser.acceptedRequest.push({_id:team_id});
     }
       newUser.pendingRequest = newUser.pendingRequest.filter((request) => request._id.toString() !== team_id);
@@ -124,10 +127,12 @@ export const confirmation= async (req,res)=>{
        title:team.title,
        description:team.description,
        team_id:team._id,
+       skillRequired:team.skillRequired,
        size:team.intake,
        message:val.message,
        name:myUser.firstName+" "+myUser.lastName,
        email:myUser.email,
+       skill:regUser.skills,
        contactNumber:myUser.contactNumber,
        user_id:val.user_id,
       }
@@ -188,6 +193,7 @@ export const getTeam= async (req,res)=>{
         teamId:team._id,
         userId:team.userId,
         title:team.title,
+        skillRequired:team.skillRequired,
         description:team.description,
         intake:team.intake,
         remaining:team.remaining,
@@ -210,7 +216,7 @@ export const deleteMember = async(req,res)=>{
       const {id,user_id}=req.params;
       const team=await Team.findById(id);
       const user=await User.findById(user_id);
-
+      team.remaining=team.remaining+1;
       user.acceptedRequest = user.acceptedRequest.filter((request) => request._id.toString() !== id);
       team.members = team.members.filter((request) => request._id.toString() !== user_id);
       await user.save();
@@ -222,6 +228,7 @@ export const deleteMember = async(req,res)=>{
               name:newUser.firstName+" "+newUser.lastName,
               contactNumber:newUser.contactNumber,
               email:newUser.email,
+              skill:newUser.skills,
               id:newUser._id,
           }
           return finalUser;
@@ -231,6 +238,7 @@ export const deleteMember = async(req,res)=>{
           teamId:team._id,
           userId:team.userId,
           title:team.title,
+          skillRequired:team.skillRequired,
           description:team.description,
           intake:team.intake,
           remaining:team.remaining,

@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { setOpen,setHeading } from "../../store/mainSlice";
 function NavLinks(){
+    const dispatch=useDispatch();
+    const navState=useSelector((state)=>state.main);
     const links=[{name:"Requests",sublinks:[
         {head:"Pending", link:'/Pending'},
         {head:"Accepted", link:'/Accepted'}
@@ -8,20 +12,18 @@ function NavLinks(){
         {head:"All Teams", link:'/myTeams'},
         {head:"Join Requests", link:'/join'},
         {head:"Create Team", link:'/create'}]}]
-   
-        const [heading,setHeading]=useState('');
 
    return(
      <>
        {links.map((link)=>(
-         <div>
+         <div className="z-30">
             <div className="px-3 text-left cursor-default group">
                 <h1 className="py-7 flex justify-between cursor-pointer items-center group" onClick={()=>{
-                    heading !== link.name ? setHeading(link.name) : setHeading('')
+                    navState.heading !== link.name ? dispatch(setHeading(link.name)) : dispatch(setHeading(''))
                 }}>{link.name}
                 
                 <span className=" text-xl md:hidden inline">
-                    <ion-icon name={`${heading===link.name ? 'chevron-up' : 'chevron-down'}`}></ion-icon>
+                    <ion-icon name={`${navState.heading===link.name ? 'chevron-up' : 'chevron-down'}`}></ion-icon>
                 </span>
 
                 <span className=" text-xl md:ml-2 md:mt-1 md:block hidden group-hover:rotate-180 group-hover:-mt-2">
@@ -30,7 +32,7 @@ function NavLinks(){
 
                 </h1>
                  <div>
-                    <div className=" absolute top-20 hidden group-hover:md:block hover:md:block">
+                    <div className={` absolute top-20 hidden group-hover:md:block hover:md:block`}>
                         <div className="py-3">
                             <div className=" w-4 h-4 left-3 absolute mt-2
                                 bg-white rotate-45">
@@ -39,7 +41,7 @@ function NavLinks(){
                         </div>
                         <div className="bg-white p-3 rounded-md">
                             {link.sublinks.map((item)=>(
-                              <li className="text-sm my-2.5">
+                              <li className="text-sm my-2.5" onClick={()=>dispatch(setHeading(''))}>
                                 <Link to={`${item.link}`}>{item.head}</Link>
                               </li>
                             ))}
@@ -48,9 +50,9 @@ function NavLinks(){
                  </div>
             </div>
             {/* Mobile View */}
-            <div className={`${heading===link.name ? 'md:hidden' : 'hidden'}`}>
+            <div className={`${navState.heading===link.name ? 'md:hidden' : 'hidden'}`}>
                 {link.sublinks.map((item)=>(
-                    <li className=" py-3 pl-8 md:pr-0 pr-5">
+                    <li className=" py-3 pl-8 md:pr-0 pr-5" onClick={()=>{dispatch(setHeading(''));dispatch(setOpen(false))}}>
                         <Link to={item.link}>{item.head}</Link>
                     </li>
                 ))}

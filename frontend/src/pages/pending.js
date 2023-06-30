@@ -2,12 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Load from "../components/loading";
 
 function Pending() {
     
      const navigate=useNavigate();
      const check=useSelector((state)=>state.auth);
      const [myTeam,setMyTeam]=useState([]);
+     const [loading,setLoading]=useState(true);
 
      const getpending=async ()=>{
           try {
@@ -16,10 +18,12 @@ function Pending() {
                    "authorization":check.myToken,
                 }
              });
+             setLoading(false);
              console.log(res.data);
              setMyTeam(res.data);
         } catch (error) {
              console.log(error);
+             setLoading(false);
         }
        }
        useEffect(()=>{
@@ -39,7 +43,11 @@ function Pending() {
              }
         }
      return (
-          <>
+          loading ? <>
+          <div className="flex justify-center w-full h-full my-40 ">
+     <Load />
+    </div>
+          </> :  <>
           <div className=" flex my-4 flex-col mt-10 ">
            {myTeam.map((team)=>(
                <div className="flex bg-white my-2 mx-4 rounded-lg px-4 py-2 flex-row justify-between shadow-md">
@@ -61,6 +69,7 @@ function Pending() {
            ))}
           </div>
           </>
+
      );
 }
 export default Pending;

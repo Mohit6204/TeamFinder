@@ -2,12 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import Load from "../components/loading";
 
 const ViewTeam = () => {
     const navigate=useNavigate();
     const check = useSelector((state) => state.auth);
     const { id } = useParams();
     const [team, setTeam] = useState({});
+    const [loading,setLoading]=useState(true);
     const getMyTeam = async () => {
         try {
             const res = await axios.get(`http://localhost:8080/post/team/${id}`, {
@@ -15,9 +17,11 @@ const ViewTeam = () => {
                     "authorization": check.myToken,
                 }
             });
+            setLoading(false);
             setTeam(res.data);
         } catch (error) {
             console.log(error);
+            setLoading(false);
         }
     }
     useEffect(() => {
@@ -39,13 +43,6 @@ const ViewTeam = () => {
         deleteTeam();
         navigate("/dashboard");
     }
-    const handleLeave= async ()=>{
-        try {
-            navigate("/Accepted");
-        } catch (error) {
-            console.log(error);
-        }
-    }
     const handleMember=async (user_id)=>{
         try {
             const res = await axios.delete(`http://localhost:8080/request/delete/${id}/${user_id}`, {
@@ -59,7 +56,11 @@ const ViewTeam = () => {
         }
     }
     return (
-            <>
+         loading ? <>
+              <div className="flex justify-center w-full h-full my-40 ">
+     <Load />
+    </div>
+         </> :   <>
                 <div className="shadow-md rounded-lg bg-white m-6 flex flex-row">
                     <div className="flex flex-col w-1/2 border-r-2">
                         <div className="py-2">
@@ -92,6 +93,9 @@ const ViewTeam = () => {
                             <p>{team.description}</p>
                         </div>
                         <div className="px-4 pb-3">
+                            <p>{team.skillRequired}</p>
+                        </div>
+                        <div className="px-4 pb-3">
                             <h1>Total Team Strength - {team.intake + 1}</h1>
                         </div>
                     </div>
@@ -108,6 +112,7 @@ const ViewTeam = () => {
                              <h1>Name - {member.name}</h1>
                              <h2>Contact Number - {member.contactNumber}</h2>
                              <h2>Email - {member.email}</h2>
+                             <h3>Skills - {member.skill}</h3>
                              </div>
                             { check.myUser._id===team.userId&&<div className="flex flex-col justify-center"> 
                              <div className=" flex ">

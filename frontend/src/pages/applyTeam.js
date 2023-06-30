@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import Load from "../components/loading";
 
 const ApplyTeam = () => {
     const {id}=useParams();
@@ -9,6 +10,7 @@ const ApplyTeam = () => {
     const navigate=useNavigate();
     const [text,setText]=useState("");
     const [team,setTeam]=useState({});
+    const [loading,setLoading]=useState(true);
     const handleChange=(event)=>{
         const {value } = event.target;
         setText(value);
@@ -32,10 +34,11 @@ const ApplyTeam = () => {
                  "authorization":check.myToken,
             }
          });
-         console.log(res.data);
          setTeam(res.data);
+         setLoading(false);
        } catch (error) {
          console.log(error);
+         setLoading(false);
        }
     }
     useEffect(()=>{
@@ -44,7 +47,11 @@ const ApplyTeam = () => {
     },[])
    
     return (
-        <>
+      loading ? <>
+           <div className="flex justify-center w-full h-full my-40 ">
+     <Load />
+    </div>
+      </> :  <>
             <div className="shadow-md rounded-lg bg-white m-6 flex flex-row">
                 <div className="flex flex-col w-1/2 border-r-2">
                     <div className="py-2">

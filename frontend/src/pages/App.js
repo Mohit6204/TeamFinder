@@ -13,11 +13,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { setLogin, setMyToken, setMyUser } from '../store/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import Load from "./loading";
+import Load from "../components/loading";
 import ApplyTeam from "./applyTeam";
 import MyTeams from "./myTeams";
 import ViewTeam from "./viewTeam";
 import Join from "./joinRequest";
+import EditProfile from "./editProfile";
+import PageNotFound from "../components/pageNotFound";
 
 
 function App() {
@@ -25,21 +27,25 @@ function App() {
   const [loading,setLoading]=useState(true);
   const dispatch=useDispatch();
   const getTeam=async ()=>{
-    const token=window.localStorage.getItem("token");
-    if(token){
-     const res=await axios.get("http://localhost:8080/auth/getUser",{
-       headers:{
-         "authorization":token,
+       try {
+        const token=window.localStorage.getItem("token");
+        const res=await axios.get("http://localhost:8080/auth/getUser",{
+          headers:{
+            "authorization":token,
+          }
+        });
+           const {password,...curUser}=res.data;
+           dispatch(setLogin(true));
+           dispatch(setMyUser(curUser));
+           dispatch(setMyToken(token));
+           setLoading(false);
+       } catch (error) {
+        window.localStorage.removeItem("token");
+        dispatch(setLogin(false));
+        dispatch(setMyUser(null));
+        dispatch(setMyToken(null));
+        setLoading(false);
        }
-     });
-     if(res.status<=300){
-       const {password,...curUser}=res.data;
-       dispatch(setLogin(true));
-       dispatch(setMyUser(curUser));
-       dispatch(setMyToken(token));
-     }
-    }
-    setLoading(false);
   } 
    useEffect(()=>{
        getTeam();
@@ -67,10 +73,12 @@ function App() {
          <Route path="/myTeams" element={<MyTeams />} />
          <Route path="/team/:id" element={<ViewTeam />} />
          <Route path="/join" element={<Join />} />
+         <Route path="/viewProfile" element={<EditProfile />} />
          </>
          : 
          null
          }
+          <Route path="*" element={<PageNotFound />} />
        </Routes>
        <Footer />
      </div>

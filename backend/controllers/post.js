@@ -51,11 +51,12 @@ export const createTeam=async (req,res)=>{
     try {
         const userId=req.user;
         const newuser= await User.findById(userId);
-        const {description,title,intake}=req.body;
+        const {description,title,intake,skillRequired}=req.body;
         const newpost= new Team({
             userId,
             adminName:newuser.firstName+" "+newuser.lastName,
             description,
+            skillRequired,
             title,
             intake,
             remaining:intake,
@@ -117,6 +118,7 @@ export const viewTeam = async (req,res)=>{
                 name:newUser.firstName+" "+newUser.lastName,
                 contactNumber:newUser.contactNumber,
                 email:newUser.email,
+                skill:newUser.skills,
                 id:newUser._id,
             }
             return finalUser;
@@ -127,6 +129,7 @@ export const viewTeam = async (req,res)=>{
             userId:team.userId,
             title:team.title,
             description:team.description,
+            skillRequired:team.skillRequired,
             intake:team.intake,
             remaining:team.remaining,
             members:myMembers,
@@ -146,8 +149,8 @@ export const edit = async (req,res)=>{
     try {
        const {id}=req.params;
        const newTeam=await Team.findById(id);
-       const{title,description,intake}=newTeam;
-       const response={title,description,intake}
+       const{title,description,intake,skillRequired}=newTeam;
+       const response={title,description,intake,skillRequired}
        res.status(200).json(response);
     } catch (error) {
         res.status(404).json({error:error.message});

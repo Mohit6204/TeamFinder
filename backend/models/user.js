@@ -25,6 +25,12 @@ const UserSchema=new mongoose.Schema(
             max:100,
             unique:true,
         },
+        skills:{
+            type: String,
+            required:true,
+            min:1,
+            max:20,
+          },
         password:{
             type:String,
             required:true,

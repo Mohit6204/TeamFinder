@@ -14,6 +14,12 @@ const TeamSchema=new mongoose.Schema(
         required:true,
         min:1,
        },
+       skillRequired:{
+         type: String,
+         required:true,
+         min:1,
+         max:20,
+       },
        title:{
         type:String,
         required:true,
