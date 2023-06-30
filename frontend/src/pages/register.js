@@ -50,7 +50,7 @@ const Register=()=>{
         <form>
         <div className="bg-white my-[4%] md:mx-[25%] py-[5%] px-[5%] rounded-2xl shadow-md mx-10 ">
            <div className=" flex justify-center text-2xl pb-2">
-               <h1 className=" font-bold text-2xl overflow-auto"><span className="px-2 z-20"><ion-icon name="person-add"></ion-icon></span>REGISTER</h1>
+               <h1 className=" font-bold text-2xl overflow-auto p-1"><span className="px-2 z-20"><ion-icon name="person-add"></ion-icon></span>REGISTER</h1>
            </div>
            <div className=" flex flex-col justify-between overflow-auto xl:flex-row ">
            <div className=" flex justify-center py-4 flex-col xl:w-2/5 w-full">

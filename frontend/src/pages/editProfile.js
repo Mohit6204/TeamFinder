@@ -64,8 +64,8 @@ const EditProfile=()=>{
        </> : <>
        <form>
         <div className="bg-white my-[4%] md:mx-[25%] py-[5%] px-[5%] rounded-2xl shadow-md mx-10 ">
-           <div className=" flex justify-center text-2xl pb-2">
-               <h1 className=" font-bold text-2xl overflow-auto">Edit your Profile<span className="px-2 z-20"><ion-icon name="pencil-outline"></ion-icon></span></h1>
+           <div className=" flex justify-center text-2xl pb-2 ">
+               <h1 className=" font-bold text-2xl overflow-auto p-1">Edit your Profile<span className="px-2 z-20"><ion-icon name="pencil-outline"></ion-icon></span></h1>
            </div>
            <div className=" flex flex-col justify-between overflow-auto xl:flex-row ">
            <div className=" flex justify-center py-4 flex-col xl:w-2/5 w-full">

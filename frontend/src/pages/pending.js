@@ -47,7 +47,8 @@ function Pending() {
           <div className="flex justify-center w-full h-full my-40 ">
      <Load />
     </div>
-          </> :  <>
+          </> : 
+           myTeam.length ? <>
           <div className=" flex my-4 flex-col mt-10 ">
            {myTeam.map((team)=>(
                <div className="flex bg-white my-2 mx-4 rounded-lg px-4 py-2 flex-row justify-between shadow-md">
@@ -67,6 +68,11 @@ function Pending() {
                    </div>
                </div>
            ))}
+          </div>
+          </> : <>
+          <div className=" flex justify-center p-4 h-screen items-center flex-col">
+               <h1 className=" text-xl font-medium">Sorry, you have not applied for any team.</h1>
+               <div className="py-2 hover:text-blue-600 cursor-pointer" onClick={()=>navigate("/dashboard")}>Apply now</div>
           </div>
           </>
 

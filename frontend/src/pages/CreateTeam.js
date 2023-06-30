@@ -45,8 +45,8 @@ function Createteam() {
      return(
          <form>
          <div className="bg-white my-[4%] md:mx-[25%] py-[5%] px-[5%] rounded-2xl shadow-md mx-10 ">
-            <div className=" flex justify-center text-2xl pb-2">
-                <h1 className=" font-bold text-2xl overflow-auto">Make Your Team Here</h1>
+            <div className=" flex justify-center text-2xl pb-3">
+                <h1 className=" font-bold text-2xl overflow-auto py-1">Make Your Team Here</h1>
             </div>
             <div className=" flex justify-center py-4 flex-col w-full">
                 <label className=" pl-1 pb-2 text-slate-800" htmlFor="title">Title</label>
