@@ -57,7 +57,7 @@ function App() {
           <Load />
          </div>
        : 
-       <div className="h-full w-full object-cover bg-slate-100">
+       <div className=" bg-slate-100 h-screen">
        <Navbar />
        <Routes>
          <Route path="/" element={<Home />} />

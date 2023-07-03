@@ -41,35 +41,38 @@ function Accepted() {
          <div className="flex justify-center w-full h-full my-40 ">
             <Load />
          </div>
-      </> : 
+      </> :
          myTeam.length ? <>
-         <div className=" mx-auto py-36 px-8">
-            <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
-               {myTeam.map((team) => (
-                  <div className="shadow-md rounded-2xl bg-white m-6 hover:shadow-xl hover:m-5 duration-200 cursor-pointer" onClick={() => handleView(team)}>
-                     <div className="py-2">
-                        <h1 className=" flex justify-center text-xl font-semibold">{team.title}</h1>
+            <div className=" mx-auto py-36 px-8 bg-slate-100">
+               <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
+                  {myTeam.map((team) => (
+                     <div className="shadow-md rounded-2xl bg-white m-6 hover:shadow-xl hover:m-5 duration-200 cursor-pointer p-3 hover:p-4" onClick={() => handleView(team)}>
+                        <div className="py-2">
+                           <h1 className=" flex justify-center text-2xl font-medium">{team.title}</h1>
+                        </div>
+                        <div className=" flex justify-center py-1 pb-2">
+                           <hr className=" w-full rounded-full bg-black border-[1px] border-gray-200 " />
+                        </div>
+                        <div className="px-4 pb-3 ">
+                           <p className=" text-sm text-slate-600 justify-end">{team.description}</p>
+                        </div>
+                        <div className="px-4 pb-3 flex justify-end">
+                           <h1><span className=" text-xl font-medium">{team.size}</span><span className=" text-xs"> Members</span></h1>
+                        </div>
+                        <div className="px-4 pb-3">
+                           <h1 className=" text-sm text-slate-500"><span className="">By,</span> {team.adminName}</h1>
+                        </div>
                      </div>
-                     <div className="px-4 pb-3">
-                        <p>{team.description}</p>
-                     </div>
-                     <div className="px-4 pb-3">
-                        <h1>Team Size - {team.size}</h1>
-                     </div>
-                     <div className="px-4 pb-3">
-                        <h1>Admin Name - {team.adminName}</h1>
-                     </div>
-                  </div>
 
-               ))}
+                  ))}
+               </div>
             </div>
-         </div>
-      </> : <>
-          <div className=" flex justify-center p-4 h-screen items-center flex-col">
+         </> : <>
+            <div className=" flex justify-center p-4 h-screen items-center flex-col">
                <h1 className=" text-xl font-medium">Sorry, you are not added to any team yet.</h1>
-               <div className="py-2 hover:text-blue-600 cursor-pointer" onClick={()=>navigate("/Pending")}>Your Requests</div>
-          </div>
-          </>
+               <div className="py-2 hover:text-blue-600 cursor-pointer" onClick={() => navigate("/Pending")}>Your Requests</div>
+            </div>
+         </>
    );
 }
 export default Accepted;

@@ -47,7 +47,7 @@ const Register=()=>{
 
 
     return(
-        <form>
+        <div className=" bg-slate-100">
         <div className="bg-white my-[4%] md:mx-[25%] py-[5%] px-[5%] rounded-2xl shadow-md mx-10 ">
            <div className=" flex justify-center text-2xl pb-2">
                <h1 className=" font-bold text-2xl overflow-auto p-1"><span className="px-2 z-20"><ion-icon name="person-add"></ion-icon></span>REGISTER</h1>
@@ -88,7 +88,7 @@ const Register=()=>{
             <h1 className=" hover:text-blue-700 cursor-pointer" onClick={()=>navigate("/Login")}>Already have an Account</h1>
         </div>
         </div>
-        </form>
+       </div>
     )
 }
 export default Register;

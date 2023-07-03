@@ -67,11 +67,11 @@ function Dashboard() {
 
    return (
       loading ? <>
-         <div className="flex justify-center w-full h-full my-40 ">
+         <div className="flex justify-center w-full h-full my-40  ">
             <Load />
          </div>
       </> : <>
-         <div className="h-screen">
+         <div className=" bg-slate-100">
             <div className="flex justify-center mt-20">
                <div class="relative text-gray-600 focus-within:text-gray-400 shadow-sm rounded-full w-80 focus-within:shadow-md border-2 focus-within:border-0 ">
                   <span class="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -82,40 +82,49 @@ function Dashboard() {
             </div>
             <div className=" mx-auto py-36 px-8">
                {
-                  initial.length ? 
-                    myTeam.length ? <>
-                                         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
-                        {myTeam.map((team) => (
-                           <div className="shadow-md rounded-2xl bg-white m-6 hover:shadow-xl hover:m-5 duration-200 cursor-pointer" onClick={() => handleApply(team._id)}>
-                              <div className="py-2">
-                                 <h1 className=" flex justify-center text-xl font-semibold">{team.title}</h1>
+                  initial.length ?
+                     myTeam.length ? <>
+                        <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
+                           {myTeam.map((team) => (
+                              <div className="shadow-md rounded-2xl bg-white m-6 hover:shadow-xl hover:m-5 hover:p-4 duration-200 cursor-pointer p-3" onClick={() => handleApply(team._id)}>
+                                 <div className="py-2">
+                                    <h1 className=" flex justify-center text-2xl font-medium">{team.title}</h1>
+                                 </div>
+                                 <div className=" flex justify-center py-1 pb-2">
+                                    <hr className=" w-full rounded-full bg-black border-[1px] border-gray-200 " />
+                                 </div>
+                                 <div className=" flex flex-col justify-between py-2">
+                                    <div>
+                                       <div className="px-4 pb-3 ">
+                                          <p className=" text-sm text-slate-600 justify-end">{team.description}</p>
+                                       </div>
+                                       <div className="px-4 pb-3">
+                                          <p>{team.skillRequired}</p>
+                                       </div>
+                                    </div>
+                                    <div>
+                                       <div className="px-4 pb-3 flex justify-end">
+                                          <h1><span className=" text-xl font-medium">{team.remaining}</span><span className=" text-xs"> Members Required</span></h1>
+                                       </div>
+                                       <div className="px-4 pb-3">
+                                          <h1 className=" text-sm text-slate-500"><span className="">By,</span> {team.adminName}</h1>
+                                       </div>
+                                    </div>
+                                 </div>
                               </div>
-                              <div className="px-4 pb-3">
-                                 <p>{team.description}</p>
-                              </div>
-                              <div className="px-4 pb-3">
-                                 <p>{team.skillRequired}</p>
-                              </div>
-                              <div className="px-4 pb-3">
-                                 <h1>Members Required - {team.remaining}</h1>
-                              </div>
-                              <div className="px-4 pb-3">
-                                 <h1>Team Admin - {team.adminName}</h1>
-                              </div>
-                           </div>
-                        ))}
-                     </div>
-                    </> : <>
-                    <div className=" flex justify-center p-4 items-center flex-col">
-                        <h1 className=" text-xl font-medium">Oops, it looks like the team you searched for does not exist.</h1>
-                        <h1 className="py-2">We suggest you to try different keywords.</h1>
-                     </div>
-                    </>
-                   : <>
-                     <div className=" flex justify-center p-4 items-center">
-                        <h1 className=" text-xl font-medium">Sorry, no team is available now.</h1>
-                     </div>
-                  </>
+                           ))}
+                        </div>
+                     </> : <>
+                        <div className=" flex justify-center p-4 items-center flex-col">
+                           <h1 className=" text-xl font-medium">Oops, it looks like the team you searched for does not exist.</h1>
+                           <h1 className="py-2">We suggest you to try different keywords.</h1>
+                        </div>
+                     </>
+                     : <>
+                        <div className=" flex justify-center p-4 items-center">
+                           <h1 className=" text-xl font-medium">Sorry, no team is available now.</h1>
+                        </div>
+                     </>
                }
             </div>
          </div>
