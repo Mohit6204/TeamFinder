@@ -31,8 +31,8 @@ function Navbartop() {
             </div>
             <ul className='md:flex hidden items-center gap-3 '>
               <li className='flex flex-row gap-3'>
-                <div className="py-7 px-3 inline-block">
-                <Link to="/">Home</Link>
+                <div className="py-7 px-3 inline-block ">
+                <Link to="/" >Home</Link>
                 </div>
                 <div className="py-7 px-3 inline-block">
                 <Link to="/dashboard">Dashboard</Link>
@@ -47,7 +47,7 @@ function Navbartop() {
                           />
  
                     </>) :<>
-                        <div className=' text-center'>
+                        <div className=' text-center' >
                           {profile&&<div className='absolute h-full w-full inset-0 z-40' onClick={()=>{setProfile(false)}}/>}
                           <div className=' pr-5 cursor-pointer' id='profile' onClick={()=>setProfile(!profile)}>
                              <span className=' text-3xl'><ion-icon name="person-circle-outline"></ion-icon></span>

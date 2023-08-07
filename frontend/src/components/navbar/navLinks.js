@@ -18,7 +18,7 @@ function NavLinks(){
        {links.map((link)=>(
          <div className="z-30">
             <div className="px-3 text-left cursor-default group">
-                <h1 className="md:py-7 py-3 flex justify-between cursor-pointer items-center group" onClick={()=>{
+                <h1 className={`md:py-7 py-3 flex justify-between cursor-pointer items-center group`} onClick={()=>{
                     navState.heading !== link.name ? dispatch(setHeading(link.name)) : dispatch(setHeading(''))
                 }}>{link.name}
                 

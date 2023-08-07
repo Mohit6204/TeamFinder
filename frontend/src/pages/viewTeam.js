@@ -60,7 +60,7 @@ const ViewTeam = () => {
             <div className="flex justify-center w-full h-full my-40 ">
                 <Load />
             </div>
-        </> : <>
+        </> : <div>
             <div className="shadow-md rounded-lg bg-white m-6 flex flex-row">
                 <div className="flex flex-col w-1/2 border-r-2">
                     <div className="py-2">
@@ -104,6 +104,9 @@ const ViewTeam = () => {
                 <div className=" flex justify-center text-xl font-semibold py-2">
                     <h1>Members</h1>
                 </div>
+                <div className="p-2 px-5">
+                    <div className=" rounded-lg border-2 text-center p-1 text-lg w-28 hover:bg-green-500 hover:text-slate-100 cursor-pointer transition-all" onClick={()=>navigate(`/chat/${team.teamId}`)}>Chat <span><ion-icon name="chatbubble-ellipses"></ion-icon></span></div>
+                </div>
                 <ol>
                     {team.members.length ? team.members.map((member) => (
                         <li>
@@ -128,7 +131,7 @@ const ViewTeam = () => {
                     </>}
                 </ol>
             </div>
-        </>
+        </div>
     )
 }
 export default ViewTeam;

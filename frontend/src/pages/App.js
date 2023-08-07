@@ -20,10 +20,12 @@ import ViewTeam from "./viewTeam";
 import Join from "./joinRequest";
 import EditProfile from "./editProfile";
 import PageNotFound from "../components/pageNotFound";
-
+import { useAutoAnimate } from '@formkit/auto-animate/react'
+import Chat from "./Chat";
 
 function App() {
   const check=useSelector((state)=>state.auth);
+  const [parent, _] = useAutoAnimate()
   const [loading,setLoading]=useState(true);
   const dispatch=useDispatch();
   const getTeam=async ()=>{
@@ -57,7 +59,7 @@ function App() {
           <Load />
          </div>
        : 
-       <div className=" bg-slate-100 min-h-screen relative">
+       <div className=" bg-slate-100 min-h-screen relative" ref={parent}>
        <Navbar />
        <Routes>
          <Route path="/" element={<Home />} />
@@ -74,6 +76,7 @@ function App() {
          <Route path="/team/:id" element={<ViewTeam />} />
          <Route path="/join" element={<Join />} />
          <Route path="/viewProfile" element={<EditProfile />} />
+         <Route path="/chat/:id" element={<Chat />} />
          </>
          : 
          null
