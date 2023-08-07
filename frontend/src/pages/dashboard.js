@@ -64,14 +64,13 @@ function Dashboard() {
       setVal(value);
       setMyTeam(initial.filter((team) => (team.title.match(regex) || team.skillRequired.match(regex) || team.adminName.match(regex))));
    }
-
    return (
       loading ? <>
-         <div className="flex justify-center w-full h-full my-40  ">
+         <div className="flex justify-center w-full h-full my-40 min-h-screen ">
             <Load />
          </div>
       </> : <>
-         <div className=" bg-slate-100">
+         <div className=" bg-slate-100 min-h-screen">
             <div className="flex justify-center mt-20">
                <div class="relative text-gray-600 focus-within:text-gray-400 shadow-sm rounded-full w-80 focus-within:shadow-md border-2 focus-within:border-0 ">
                   <span class="absolute inset-y-0 left-0 flex items-center pl-2">

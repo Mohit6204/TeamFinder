@@ -50,7 +50,7 @@ function Join() {
                </div>
           </> :
                myTeam.length ? <>
-                    <div className=" flex my-4 flex-col mt-10 ">
+                    <div className=" flex my-4 flex-col mt-10 min-h-screen">
                          {myTeam.map((team) => (
                               <div className="flex bg-white my-2 mx-10 rounded-2xl px-4 py-2 flex-row justify-between shadow-md">
                                    <div className=" flex flex-col">

@@ -57,7 +57,7 @@ function App() {
           <Load />
          </div>
        : 
-       <div className=" bg-slate-100 h-screen">
+       <div className=" bg-slate-100 min-h-screen relative">
        <Navbar />
        <Routes>
          <Route path="/" element={<Home />} />

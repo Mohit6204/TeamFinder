@@ -18,11 +18,9 @@ function Pending() {
                          "authorization": check.myToken,
                     }
                });
-               setLoading(false);
-               console.log(res.data);
                setMyTeam(res.data);
+               setLoading(false);
           } catch (error) {
-               console.log(error);
                setLoading(false);
           }
      }
@@ -49,7 +47,7 @@ function Pending() {
                </div>
           </> :
                myTeam.length ? <>
-                    <div className=" flex my-4 flex-col mt-10 ">
+                    <div className=" flex my-4 flex-col mt-10 min-h-screen">
                          {myTeam.map((team) => (
                               <div className="flex bg-white my-2 mx-20 rounded-lg px-4 py-2 flex-row justify-between shadow-md">
                                    <div className="pl-2 py-2 overflow-auto">

@@ -29,8 +29,8 @@ function Navbartop() {
               <ion-icon name={`${navState.open ? 'close' : 'menu'}`}></ion-icon>
               </div>
             </div>
-            <ul className='md:flex hidden items-center gap-3 font-[Poppins]'>
-              <li>
+            <ul className='md:flex hidden items-center gap-3 '>
+              <li className='flex flex-row gap-3'>
                 <div className="py-7 px-3 inline-block">
                 <Link to="/">Home</Link>
                 </div>
@@ -48,11 +48,12 @@ function Navbartop() {
  
                     </>) :<>
                         <div className=' text-center'>
+                          {profile&&<div className='absolute h-full w-full inset-0 z-40' onClick={()=>{setProfile(false)}}/>}
                           <div className=' pr-5 cursor-pointer' id='profile' onClick={()=>setProfile(!profile)}>
                              <span className=' text-3xl'><ion-icon name="person-circle-outline"></ion-icon></span>
                              <div className=' text-sm text-slate-500 '>{check.myUser.firstName}</div>
                           </div>
-                          <div className={`bg-white absolute top-20 py-4 px-2 right-7 rounded-lg ${profile ? 'block' : 'hidden'} transition-all`} >
+                          <div className={`bg-white absolute top-20 py-4 px-2 right-7 rounded-lg z-50 ${profile ? 'block' : 'hidden'} transition-all`} >
                              <div className=' text-sm py-2  hover:text-blue-700 cursor-pointer' onClick={()=>{setProfile(!profile);navigate("/viewProfile")}}>Edit Profile</div>
                              <div className=' text-sm py-1 hover:text-blue-700 cursor-pointer' onClick={()=>{setProfile(!profile);handleLogout()}}>Logout</div>
                           </div>

@@ -5,6 +5,7 @@ import { setLogin,setMyUser,setMyToken } from "../store/authSlice";
 import axios from "axios";
 
 const Register=()=>{
+    const [exist,setExist]=useState(false);
     const dispatch=useDispatch();
     const addUser = async (newUser) => {
         try {
@@ -20,7 +21,16 @@ const Register=()=>{
            dispatch(setMyToken(res.data.token));
            navigate("/");
         } catch (error) {
-          console.log(error);
+            console.log(error)
+          let str=error?.response?.data?.error;
+          if(str && typeof str==="string" && str.slice(0,6) === "E11000"){
+            setExist("!!User with same email already exist.");
+          }else if(str){
+            setExist(str)
+          }else{
+            setExist("Something went Wrong!")
+          }
+        //   console.log(error.response.data.error);
         }
       }
 
@@ -48,7 +58,7 @@ const Register=()=>{
 
     return(
         <div className=" bg-slate-100">
-        <div className="bg-white my-[4%] md:mx-[25%] py-[5%] px-[5%] rounded-2xl shadow-md mx-10 ">
+        <div className="bg-white my-[4%] md:mx-[25%] py-[5%] px-[5%] rounded-2xl shadow-md mx-10 " onClick={()=>setExist(false)}>
            <div className=" flex justify-center text-2xl pb-2">
                <h1 className=" font-bold text-2xl overflow-auto p-1"><span className="px-2 z-20"><ion-icon name="person-add"></ion-icon></span>REGISTER</h1>
            </div>
@@ -87,6 +97,9 @@ const Register=()=>{
            <div className=" flex justify-center pt-6" >
             <h1 className=" hover:text-blue-700 cursor-pointer" onClick={()=>navigate("/Login")}>Already have an Account</h1>
         </div>
+        {(exist)&&<div className=" flex justify-center pt-6" >
+            <h1 className=" text-red-700 font-semibold">{exist}</h1>
+        </div>}
         </div>
        </div>
     )
