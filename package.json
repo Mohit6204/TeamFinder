@@ -1,0 +1,17 @@
+{
+  "name": "teamfinder",
+  "version": "1.0.0",
+  "description": "New Project",
+  "main": "index.js",
+  "scripts": {
+    "frontend": "cd ./frontend && npm run start",
+    "backend": "concurrently \"cd ./backend && npm run dev\" \"cd ./Chat && npm run dev\"",
+    "dev": "concurrently npm:frontend npm:backend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

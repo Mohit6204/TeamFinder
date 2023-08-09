@@ -21,7 +21,7 @@ import Join from "./joinRequest";
 import EditProfile from "./editProfile";
 import PageNotFound from "../components/pageNotFound";
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-import Chat from "./Chat";
+import Chat from "../Mychats/Chat";
 
 function App() {
   const check=useSelector((state)=>state.auth);

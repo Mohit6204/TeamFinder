@@ -252,3 +252,9 @@ export const deleteMember = async(req,res)=>{
     res.status(404).json({error:error.message});
   }
 }
+
+// Get Chat Data
+
+export const Chat = async(req,res)=>{
+
+};
