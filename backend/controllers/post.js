@@ -1,5 +1,6 @@
 import Team from "../models/team.js";
 import User from "../models/user.js";
+import axios from 'axios';
 
 // Get all Teams without login
 
@@ -63,6 +64,8 @@ export const createTeam=async (req,res)=>{
             members:[],
         });
         const savedPost=await newpost.save();
+        let auth="chatauthenticationmohit6204";
+        axios.post(`http://localhost:5000/create/${savedPost._id}`,{auth});
         newuser.teams.push({_id:savedPost._id});
         newuser.save();
         res.status(201).json(savedPost);
@@ -99,6 +102,8 @@ export const deleteTeam =async (req,res)=>{
                 await regUser.save();
             }
         }));
+        let auth="chatauthenticationmohit6204";
+        axios.post(`http://localhost:5000/delete/${team._id}`,{auth});
         await Team.findByIdAndDelete(team._id);
         res.status(200);
     } catch (error) {
