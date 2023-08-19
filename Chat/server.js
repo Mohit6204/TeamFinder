@@ -71,8 +71,8 @@ const io= new Server(server, {
 io.on('connection',(socket)=>{
     console.log("chat connected..")
     socket.on("message",(cnt)=>{
-        console.log(cnt.name)
-        console.log(cnt.message)
+         io.emit("receive",cnt.message);
+
     })
 })
 

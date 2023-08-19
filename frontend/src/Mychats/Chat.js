@@ -1,19 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import socketIO from "socket.io-client";
-const socket=socketIO.connect('http://localhost:5000');
 const Chat = () => {
   const [message, setMessage] = useState("");
-  const handlechange = (event) => {
-    const { value } = event.target;
-    setMessage(value);
-  };
+  const [allmessage, setAllMessages] = useState([]);
+    const socketRef = useRef(null);
+  useEffect(()=>{
+
+    const socket= socketIO('http://localhost:5000');
+    console.log("connected")
+    socket.on("receive",newMessage=>{
+      setAllMessages(()=>[...allmessage, newMessage]);
+    })
+    socketRef.current = socket;
+    return ()=>{
+      socket.disconnect(); 
+    console.log("disconnected")
+
+  }
+},[])
+const socket = socketRef.current;
+const handlechange = (event) => {
+  const { value } = event.target;
+  setMessage(value);
+};
   const handleMessage=async()=>{
       try {
          const cnt={
           name:"Mohit",
           message:message,
          }
-         console.log(message);
          socket.emit("message",cnt);
          setMessage("");
       } catch (error) {
