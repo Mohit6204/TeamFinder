@@ -1,24 +1,24 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { setOpen,setHeading } from "../../store/mainSlice";
-function NavLinks(){
+function NavLinks({pathMap}){
     const dispatch=useDispatch();
     const navState=useSelector((state)=>state.main);
     const links=[{name:"Requests",sublinks:[
-        {head:"Pending", link:'/Pending'},
-        {head:"Accepted", link:'/Accepted'}
+        {head:"Pending", link:'/request/Pending'},
+        {head:"Accepted", link:'/request/Accepted'}
     ]},{name:"My Teams",sublinks:[
-        {head:"All Teams", link:'/myTeams'},
-        {head:"Join Requests", link:'/join'},
-        {head:"Create Team", link:'/create'}]}]
+        {head:"All Teams", link:'/teams/myTeams'},
+        {head:"Join Requests", link:'/teams/join'},
+        {head:"Create Team", link:'/teams/create'}]}]
 
    return(
      <>
        {links.map((link)=>(
          <div className="z-30">
             <div className="px-3 text-left cursor-default group">
-                <h1 className={`md:py-7 py-3 flex justify-between cursor-pointer items-center group`} onClick={()=>{
+                <h1 className={`md:py-7 py-3 flex justify-between cursor-pointer items-center group relative inline-block overflow-hidden after:absolute after:content-[''] ${pathMap[link.name]?"after:left-0 after:from-blue-200 after:to-blue-500":'after:-left-full after:from-indigo-400 after:to-indigo-700'} after:bg-gradient-to-l after:transition-all hover:after:left-0 after:bottom-6 after:w-full after:h-1 `} onClick={()=>{
                     navState.heading !== link.name ? dispatch(setHeading(link.name)) : dispatch(setHeading(''))
                 }}>{link.name}
                 

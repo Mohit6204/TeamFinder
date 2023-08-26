@@ -67,14 +67,14 @@ function App() {
          <Route path="/Login" element={<Login />} />
          <Route path="/Register" element={<Register />} />
         {check.isLogin ? 
-          <><Route path="/create" element={<CreateTeam />} />
-         <Route path="/Accepted" element={<Accepted />} />
-         <Route path="/Pending" element={<Pending />} />
+          <><Route path="/teams/create" element={<CreateTeam />} />
+         <Route path="/request/Accepted" element={<Accepted />} />
+         <Route path="/request/Pending" element={<Pending />} />
          <Route path="/edit/:id" element={<EditTeam />} />
          <Route path="/applyTeam/:id" element={<ApplyTeam />} />
-         <Route path="/myTeams" element={<MyTeams />} />
+         <Route path="/teams/myTeams" element={<MyTeams />} />
          <Route path="/team/:id" element={<ViewTeam />} />
-         <Route path="/join" element={<Join />} />
+         <Route path="/teams/join" element={<Join />} />
          <Route path="/viewProfile" element={<EditProfile />} />
          <Route path="/chat/:id" element={<Chat />} />
          </>

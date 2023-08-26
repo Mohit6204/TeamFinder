@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import NavLinks from './navLinks';
 import Button from './button';
 import {useSelector } from 'react-redux/es/hooks/useSelector';
@@ -15,7 +15,13 @@ function Navbartop() {
        dispatch(setMyUser(null));
        navigate("/");
   }
-
+   const location =useLocation();
+   const pathMap =  {
+      home: location.pathname == '/',
+      dashboard: location.pathname == '/dashboard',
+      Requests: location.pathname.includes('/request'),
+      "My Teams": location.pathname.includes('/teams'),
+   }
   const check=useSelector((state)=>state.auth)
   const navState=useSelector((state)=>state.main);
   const navigate=useNavigate();
@@ -30,15 +36,15 @@ function Navbartop() {
               </div>
             </div>
             <ul className='md:flex hidden items-center gap-3 '>
-              <li className='flex flex-row gap-3'>
-                <div className="py-7 px-3 inline-block ">
+              <li className='flex flex-row gap-7 px-3'>
+                <div className={`py-7 relative inline-block overflow-hidden after:absolute after:content-[''] ${pathMap.home?"after:left-0 after:from-blue-200 after:to-blue-500":'after:-left-full after:from-indigo-400 after:to-indigo-700'} after:bg-gradient-to-l after:transition-all hover:after:left-0 after:bottom-6 after:w-full after:h-1 `}>
                 <Link to="/" >Home</Link>
                 </div>
-                <div className="py-7 px-3 inline-block">
+                <div className={`py-7 relative inline-block overflow-hidden after:absolute after:content-[''] ${pathMap.dashboard?"after:left-0 after:from-blue-200 after:to-blue-500":'after:-left-full after:from-indigo-400 after:to-indigo-700'} after:bg-gradient-to-l after:transition-all hover:after:left-0 after:bottom-6 after:w-full after:h-1`}>
                 <Link to="/dashboard">Dashboard</Link>
                 </div>
               </li>
-              {check.isLogin && <NavLinks />}
+              {check.isLogin && <NavLinks pathMap={pathMap}  />}
             </ul>
             <div className='md:block hidden mx-10 text-center'>
              {!check.isLogin ? (<>
@@ -68,7 +74,7 @@ function Navbartop() {
             duration-500 ${navState.open ? "left-0" : "left-[-100%]"} z-30
             `}>
               <li>
-                <div className='py-3 px-3 block cursor-pointer' onClick={()=>{
+                <div className={`py-3 px-3 cursor-pointer relative inline-block overflow-hidden after:absolute after:content-[''] ${pathMap.home?"after:left-0 after:from-blue-200 after:to-blue-500":'after:-left-full after:from-indigo-400 after:to-indigo-700'} after:bg-gradient-to-l after:transition-all hover:after:left-0 after:bottom-0 after:w-full after:h-1`} onClick={()=>{
                   dispatch(setOpen(false));
                   navigate("/");
                 }}>
@@ -81,7 +87,7 @@ function Navbartop() {
                   Dashboard
                 </div>
               </li>
-              {check.isLogin && <NavLinks />}
+              {check.isLogin && <NavLinks pathMap={pathMap} />}
               <div className='py-5'>
               {!check.isLogin ? (<>
                             <div onClick={()=>dispatch(setOpen(false))}>
