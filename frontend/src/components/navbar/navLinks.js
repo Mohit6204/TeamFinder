@@ -18,7 +18,7 @@ function NavLinks({pathMap}){
        {links.map((link)=>(
          <div className="z-30">
             <div className="px-3 text-left cursor-default group">
-                <h1 className={`md:py-7 py-3 flex justify-between cursor-pointer items-center group relative inline-block overflow-hidden after:absolute after:content-[''] ${pathMap[link.name]?"after:left-0 after:from-blue-200 after:to-blue-500":'after:-left-full after:from-indigo-400 after:to-indigo-700'} after:bg-gradient-to-l after:transition-all hover:after:left-0 after:bottom-6 after:w-full after:h-1 `} onClick={()=>{
+                <h1 className={`md:py-7 py-3 flex justify-between cursor-pointer items-center group relative inline-block overflow-hidden after:absolute after:content-[''] ${pathMap[link.name]?"after:left-0 after:from-blue-200 after:to-blue-500":'after:-left-full after:from-indigo-400 after:to-indigo-700'} after:bg-gradient-to-l after:transition-all hover:after:left-0 ${navState.open ? "after:w-[13%] after:bottom-1" : "after:w-full after:bottom-6"} after:h-1 `} onClick={()=>{
                     navState.heading !== link.name ? dispatch(setHeading(link.name)) : dispatch(setHeading(''))
                 }}>{link.name}
                 

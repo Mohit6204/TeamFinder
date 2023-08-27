@@ -74,13 +74,13 @@ function Navbartop() {
             duration-500 ${navState.open ? "left-0" : "left-[-100%]"} z-30
             `}>
               <li>
-                <div className={`py-3 px-3 cursor-pointer relative inline-block overflow-hidden after:absolute after:content-[''] ${pathMap.home?"after:left-0 after:from-blue-200 after:to-blue-500":'after:-left-full after:from-indigo-400 after:to-indigo-700'} after:bg-gradient-to-l after:transition-all hover:after:left-0 after:bottom-0 after:w-full after:h-1`} onClick={()=>{
+                <div className={`py-3 ml-3 max-w-max cursor-pointer relative block overflow-hidden after:absolute after:content-[''] ${pathMap.home?"after:left-0 after:from-blue-200 after:to-blue-500":'after:-left-full after:from-indigo-400 after:to-indigo-700'} after:bg-gradient-to-l after:transition-all hover:after:left-0 after:bottom-0 after:w-full after:h-1`} onClick={()=>{
                   dispatch(setOpen(false));
                   navigate("/");
                 }}>
                   Home
                 </div>
-                <div className='py-3 px-3 block cursor-pointer' onClick={()=>{
+                <div className={`py-3 ml-3 max-w-max cursor-pointer block relative overflow-hidden after:absolute after:content-[''] ${pathMap.dashboard?"after:left-0 after:from-blue-200 after:to-blue-500":'after:-left-full after:from-indigo-400 after:to-indigo-700'} after:bg-gradient-to-l after:transition-all hover:after:left-0 after:bottom-0 after:w-full after:h-1`} onClick={()=>{
                   dispatch(setOpen(false));
                   navigate("/dashboard");
                 }}>
