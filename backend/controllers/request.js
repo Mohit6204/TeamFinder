@@ -254,7 +254,3 @@ export const deleteMember = async(req,res)=>{
 }
 
 // Get Chat Data
-
-export const Chat = async(req,res)=>{
-
-};

@@ -1,6 +1,6 @@
 import express from "express";
 import { verifyToken } from "../middleware/jwtAuth.js";
-import { Chat, acceptedRequest, applyTeam, cancelReq, confirmation, deleteMember, getTeam, joinRequest, pendingRequest } from "../controllers/request.js";
+import { acceptedRequest, applyTeam, cancelReq, confirmation, deleteMember, getTeam, joinRequest, pendingRequest } from "../controllers/request.js";
 
 const router=express.Router();
 

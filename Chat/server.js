@@ -5,6 +5,7 @@ import mongoose from "mongoose"
 import {Server}  from "socket.io";
 import http from "http";
 import Chat from "./Model/chat.js";
+import Messages from "./Model/message.js";
 const port = process.env.PORT || 5000;
 const app=express();
 app.use(express.json());
@@ -70,10 +71,24 @@ const io= new Server(server, {
 })
 io.on('connection',(socket)=>{
     console.log("chat connected..")
-    socket.on("message",(cnt)=>{
-         io.emit("receive",cnt.message);
-
+    socket.on("join-room",room=>{
+        socket.join(room);
     })
+    socket.on("message",async(my_message,room)=>{
+         try {
+            console.log(my_message);
+            const new_message=new Messages(my_message);
+            const savedMessage = await new_message.save();
+            const myTeam=await Chat.findOne({teamId:room});
+            myTeam.messages.push(savedMessage._id);
+            myTeam.save();
+            console.log(savedMessage);
+            io.to(room).emit("receive",savedMessage);
+         } catch (error) {
+            console.log(error)
+            socket.emit("error");
+         }
+    });
 })
 
 server.listen(port,(error)=>{

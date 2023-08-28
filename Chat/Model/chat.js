@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const ChatSchema=new mongoose.Schema(
     {
@@ -7,12 +7,15 @@ const ChatSchema=new mongoose.Schema(
           required:true
        },
        messages:{
-        type:Array,
+        type:[{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'messages'
+         }],
         default:[]
-       }
+       },
     }
 );
 
-const Chat=mongoose.model("Chat",ChatSchema);
 
+const Chat=mongoose.model("Chat",ChatSchema);
 export default Chat;

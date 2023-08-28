@@ -1,16 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import socketIO from "socket.io-client";
 const Chat = () => {
   const [message, setMessage] = useState("");
   const [allmessage, setAllMessages] = useState([]);
+  const User=useSelector((state)=>state.auth.myUser);
+  const {id}=useParams();
     const socketRef = useRef(null);
   useEffect(()=>{
 
     const socket= socketIO('http://localhost:5000');
-    console.log("connected")
     socket.on("receive",newMessage=>{
+      console.log(newMessage);
       setAllMessages(()=>[...allmessage, newMessage]);
     })
+    socket.emit("join-room",id);
     socketRef.current = socket;
     return ()=>{
       socket.disconnect(); 
@@ -25,11 +30,12 @@ const handlechange = (event) => {
 };
   const handleMessage=async()=>{
       try {
-         const cnt={
-          name:"Mohit",
-          message:message,
+         const my_message={
+          userName:User.firstName,
+          content:message,
+          userId:User._id,
          }
-         socket.emit("message",cnt);
+         socket.emit("message",my_message,id);
          setMessage("");
       } catch (error) {
          console.log(error);
