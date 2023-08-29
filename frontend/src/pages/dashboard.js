@@ -85,15 +85,15 @@ function Dashboard() {
                      myTeam.length ? <>
                         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
                            {myTeam.map((team) => (
-                              <div className="shadow-md rounded-2xl bg-white m-6 hover:shadow-xl hover:m-5 hover:p-4 duration-200 cursor-pointer p-3" onClick={() => handleApply(team._id)}>
+                              <div className="shadow-md rounded-2xl bg-white m-6 hover:shadow-xl hover:m-5 hover:p-4 duration-200 cursor-pointer p-3 flex flex-col flex-1" onClick={() => handleApply(team._id)}>
                                  <div className="py-2">
                                     <h1 className=" flex justify-center text-2xl font-medium">{team.title}</h1>
                                  </div>
                                  <div className=" flex justify-center py-1 pb-2">
                                     <hr className=" w-full rounded-full bg-black border-[1px] border-gray-200 " />
                                  </div>
-                                 <div className=" flex flex-col justify-between py-2">
-                                    <div>
+                                 <div className=" flex flex-col justify-between py-2 flex-1">
+                                    <div className=" flex flex-col flex-1">
                                        <div className="px-4 pb-3 ">
                                           <p className=" text-sm text-slate-600 justify-end">{team.description}</p>
                                        </div>
@@ -101,7 +101,7 @@ function Dashboard() {
                                           <p>{team.skillRequired}</p>
                                        </div>
                                     </div>
-                                    <div>
+                                    <div className="">
                                        <div className="px-4 pb-3 flex justify-end">
                                           <h1><span className=" text-xl font-medium">{team.remaining}</span><span className=" text-xs"> Members Required</span></h1>
                                        </div>

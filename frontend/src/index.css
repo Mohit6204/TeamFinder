@@ -6,3 +6,20 @@
 body{
     font-family: 'Poppins', sans-serif;
 }
+*{
+    scroll-behavior: smooth;
+}
+*::-webkit-scrollbar{
+    @apply bg-white;
+}
+*::-webkit-scrollbar-thumb{
+    border-radius: 6px;
+    @apply bg-neutral-300 hover:bg-stone-400 transition-all ;
+}
+*::-webkit-scrollbar-button{
+    @apply h-0;
+}
+
+.customCssInputParent:has(.customCssInput:focus){
+    @apply shadow-lg
+}

@@ -20,7 +20,7 @@ const Chat = () => {
         setLoading(false);
         setTimeout(()=>{
           pageView.current?.scrollIntoView();
-        },100)
+        },250)
        } catch (error) {
           console.log(error);
        }
@@ -50,8 +50,7 @@ const handlechange = (event) => {
   const { value } = event.target;
   setMessage(value);
 };
-  const handleMessage=async()=>{
-      try {
+  const handleMessage=()=>{
          const my_message={
           userName:User.firstName,
           content:message,
@@ -59,19 +58,20 @@ const handlechange = (event) => {
          }
          socket.emit("message",my_message,id);
          setMessage("");
-      } catch (error) {
-         console.log(error);
-      }
+  }
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    handleMessage();
   }
   return (
      loading ? <Load />
       : 
       <div>
       <div className=" bg-white min-h-screen m-10 rounded-2xl overflow-auto flex flex-col">
-        <div className=" bg-purple-700 h-20 items-center flex">
+        <div className=" bg-purple-700 h-20 items-center flex shadow-purple-400 shadow-md">
           <h1 className=" text-white font-normal text-3xl flex px-10">Chat</h1>
         </div>
-        <div className=" flex-1 overflow-auto max-h-[80vh]">
+        <div className=" flex-1 overflow-auto max-h-[70vh]">
            {allmessage&&allmessage.map((member)=>(
                <div className={` p-2 my-2 flex ${member.userId===User._id ? " flex-row-reverse" : " flex-row"}`}>
                 <div className="px-2">
@@ -86,9 +86,10 @@ const handlechange = (event) => {
            ))}
            <div ref={pageView}></div>
         </div>
-        <div className=" flex h-14 border-2 rounded-xl p-2 m-2">
+        <form onSubmit={handleSubmit}>
+        <div className=" flex h-14 border-2 rounded-xl p-2 m-2 hover:shadow-md customCssInputParent">
         <input
-            className="px-2 overflow-auto w-full"
+            className="px-2 overflow-auto w-full focus:outline-none customCssInput"
             type="text"
             id="message"
             name="message"
@@ -96,10 +97,11 @@ const handlechange = (event) => {
             placeholder="Message...."
             onChange={handlechange}
           />
-          <div className=" items-center flex px-4 cursor-pointer" onClick={()=>handleMessage()}>
+          <div className=" items-center flex px-4 cursor-pointer" onClick={handleMessage}>
           <span className=" flex text-xl"><ion-icon name="send-sharp"></ion-icon></span>
           </div>
         </div>
+        </form>
       </div>
     </div>
   );

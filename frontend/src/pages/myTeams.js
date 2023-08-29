@@ -41,14 +41,14 @@ const MyTeams = () => {
          <div className=" mx-auto py-36 px-8 ">
             <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
                {myTeam.map((team) => (
-                  <div className="shadow-md rounded-2xl bg-white m-6 hover:shadow-xl hover:m-5 duration-200 cursor-pointer p-3 hover:p-4" onClick={() => handleView(team)}>
+                  <div className="shadow-md flex flex-1 flex-col rounded-2xl bg-white m-6 hover:shadow-xl hover:m-5 duration-200 cursor-pointer p-3 hover:p-4" onClick={() => handleView(team)}>
                      <div className="py-2">
                         <h1 className=" flex justify-center text-2xl font-medium">{team.title}</h1>
                      </div>
                      <div className=" flex justify-center py-1 pb-2">
                         <hr className=" w-full rounded-full bg-black border-[1px] border-gray-200 " />
                      </div>
-                     <div className="px-4 pb-3 ">
+                     <div className="px-4 pb-3 flex flex-1 ">
                         <p className=" text-sm text-slate-600 justify-end">{team.description}</p>
                      </div>
                      <div className="px-4 pb-3 flex justify-end">

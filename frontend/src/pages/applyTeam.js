@@ -22,7 +22,7 @@ const ApplyTeam = () => {
                  "authorization":check.myToken,
             }
          });
-          navigate("/Pending");
+          navigate("/request/Pending");
        } catch (error) {
         console.log(error);
        }
