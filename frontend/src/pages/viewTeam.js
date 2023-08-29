@@ -61,35 +61,31 @@ const ViewTeam = () => {
                 <Load />
             </div>
         </> : <div>
-            <div className="shadow-md rounded-lg bg-white m-6 flex flex-row">
-                <div className="flex flex-col w-1/2 border-r-2">
-                    <div className="py-2">
+            <div className="shadow-md rounded-lg bg-white m-6 flex md:flex-row flex-col">
+                <div className="flex flex-col w-full md:w-1/2 border-r-2 flex-1">
+                    <div className="py-2 ">
                         <h1 className=" flex justify-center text-xl font-semibold">{team.title}</h1>
                     </div>
-                    <div className="px-4 pb-3">
+                    <div className="px-4 pb-3 py-2">
                         <h1>Members Required - {team.remaining}</h1>
                     </div>
-                    <div className="px-4 flex justify-between">
-                        <div className="flex">
+                        <div className="flex px-4 pb-3 flex-1">
                             <h1>Team Admin - {team.name}</h1>
                         </div>
-                        <div className="flex py-2">
                             {
                                 check.myUser._id === team.userId ?
-                                    <div className="flex flex-row">
+                                    <div className="flex flex-row justify-between px-4 py-2">
                                         <div className=" border-2 rounded-xl px-2 py-1 font-sans font-semibold hover:bg-red-700 hover:text-white cursor-pointer transition-all" onClick={() => handleDelete()}>Delete<span><ion-icon name="trash"></ion-icon></span></div>
                                         <div className=" border-2 rounded-xl px-2 py-1 font-sans font-semibold hover:bg-gray-500 hover:text-white cursor-pointer transition-all" onClick={() => navigate(`/edit/${id}`)}>Edit<span><ion-icon name="pencil"></ion-icon></span></div>
                                     </div>
-                                    : <div className=" border-2 rounded-xl px-2 py-1 font-sans font-semibold hover:bg-black/80 hover:text-white cursor-pointer transition-all" onClick={() => { handleMember(check.myUser._id); navigate("/") }}>Leave Team<span><ion-icon name="exit-outline"></ion-icon></span></div>
+                                    : <div className=" my-1 mx-auto border-2 rounded-xl px-2 py-1 font-sans font-semibold hover:bg-black/80 hover:text-white cursor-pointer transition-all" onClick={() => { handleMember(check.myUser._id); navigate("/") }}>Leave Team<span><ion-icon name="exit-outline"></ion-icon></span></div>
                             }
-                        </div>
-                    </div>
                 </div>
-                <div className="flex flex-col w-1/2">
-                    <div className="px-4 pb-3 flex justify-center">
+                <div className="flex flex-col w-full md:border-none border-t-2 md:w-1/2 flex-1">
+                    <div className="px-4 pb-3 flex justify-center py-1">
                         <h1 className="text-xl font-semibold">About Team</h1>
                     </div>
-                    <div className="px-4 pb-3">
+                    <div className="px-4 pb-3 flex flex-1">
                         <p>{team.description}</p>
                     </div>
                     <div className="px-4 pb-3">
@@ -105,19 +101,19 @@ const ViewTeam = () => {
                     <h1>Members</h1>
                 </div>
                 <div className="p-2 px-5">
-                    <div className=" rounded-lg border-2 text-center p-1 text-lg w-28 hover:bg-green-500 hover:text-slate-100 cursor-pointer transition-all" onClick={()=>navigate(`/chat/${team.teamId}`)}>Chat <span><ion-icon name="chatbubble-ellipses"></ion-icon></span></div>
+                    <div className=" rounded-lg border-2 text-center p-1 text-lg w-28 hover:bg-green-600 hover:shadow-md hover:shadow-green-400 hover:text-slate-100 cursor-pointer transition-all" onClick={()=>navigate(`/chat/${team.teamId}`)}>Chat <span><ion-icon name="chatbubble-ellipses"></ion-icon></span></div>
                 </div>
                 <ol>
                     {team.members.length ? team.members.map((member) => (
                         <li>
-                            <div className="flex justify-between border-2 rounded-lg m-4 p-2">
-                                <div className=" ">
+                            <div className="flex justify-between border-2 rounded-lg m-4 p-2 md:flex-row flex-col">
+                                <div className=" flex md:w-1/2 flex-col overflow-auto w-full ">
                                     <h1>Name - {member.name}</h1>
                                     <h2>Contact Number - {member.contactNumber}</h2>
                                     <h2>Email - {member.email}</h2>
                                     <h3>Skills - {member.skill}</h3>
                                 </div>
-                                {check.myUser._id === team.userId && <div className="flex flex-col justify-center">
+                                {check.myUser._id === team.userId && <div className="flex flex-row md:flex-col justify-center py-2">
                                     <div className=" flex ">
                                         <h1 className=" border-2 rounded-xl px-2 py-1 font-sans font-semibold hover:bg-red-700 hover:text-white cursor-pointer transition-all " onClick={() => handleMember(member.id)}>Remove Member <span className=" text-xl"><ion-icon name="close-circle"></ion-icon></span></h1>
                                     </div>

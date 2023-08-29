@@ -43,7 +43,7 @@ function Accepted() {
          </div>
       </> :
          myTeam.length ? <>
-            <div className=" s px-8 bg-slate-100">
+            <div className=" my-6 mx-auto py-2 px-8 bg-slate-100">
                <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
                   {myTeam.map((team) => (
                      <div className="shadow-md flex flex-1 flex-col rounded-2xl bg-white m-6 hover:shadow-xl hover:m-5 duration-200 cursor-pointer p-3 hover:p-4" onClick={() => handleView(team)}>

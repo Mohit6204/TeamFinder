@@ -3,7 +3,7 @@ import SVG from '../images/team'
 
 const Home= ()=>{
   return (
-     <div className="h-screen bg-white">
+     <div className="min-h-screenh-screen bg-white">
        <div className="flex border-t-2 gap-2 flex-col md:flex-row">
           <div className="md:flex-1 bg-white flex justify-center flex-col text-center mx-auto">
               <h1 className=" font-bold text-7xl md:text-9xl">

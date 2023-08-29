@@ -51,8 +51,8 @@ const ApplyTeam = () => {
            <div className="flex justify-center w-full h-full my-40 ">
      <Load />
     </div>
-      </> :  <>
-            <div className="shadow-md rounded-lg bg-white m-6 flex flex-col md:flex-row">
+      </> :  <div className="min-h-screen">
+            <div className="shadow-md rounded-lg bg-white m-6 flex flex-col md:flex-row ">
                 <div className="flex flex-1 flex-col w-full md:w-1/2 border-r-2">
                     <div className="py-2">
                         <h1 className=" flex justify-center text-xl font-semibold">{team.title}</h1>
@@ -93,7 +93,7 @@ const ApplyTeam = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 export default ApplyTeam;
