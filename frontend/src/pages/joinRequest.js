@@ -52,8 +52,8 @@ function Join() {
                myTeam.length ? <>
                     <div className=" flex my-4 flex-col mt-10 min-h-screen">
                          {myTeam.map((team) => (
-                              <div className="flex bg-white my-2 mx-10 rounded-2xl px-4 py-2 flex-row justify-between shadow-md">
-                                   <div className=" flex flex-col">
+                              <div className="flex bg-white my-2 mx-10 rounded-2xl px-4 py-2 md:flex-row flex-col justify-between shadow-md">
+                                   <div className=" flex flex-col w-[100%] md:w-1/2 overflow-auto">
                                         <div>
                                              <div className="py-2">
                                                   <h1 className=" flex text-3xl font-medium">{team.title}</h1>
@@ -96,7 +96,7 @@ function Join() {
                                              </div>
                                         </div>
                                    </div>
-                                   <div className=" flex flex-col justify-between py-2">
+                                   <div className=" flex md:flex-col flex-row justify-between py-2">
                                         <div className=" flex pt-2">
                                              <h1 className="text-sm hover:shadow-md hover:shadow-green-500 border-2 rounded-xl px-2 py-[1px] font-sans font-semibold hover:bg-green-700 hover:text-white cursor-pointer transition-all " onClick={() => handleConfirm(team.team_id, team.user_id, true)}>Accept <span className=" text-xl"><ion-icon name="checkmark"></ion-icon></span></h1>
                                         </div>

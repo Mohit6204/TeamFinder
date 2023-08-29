@@ -52,18 +52,18 @@ const ApplyTeam = () => {
      <Load />
     </div>
       </> :  <>
-            <div className="shadow-md rounded-lg bg-white m-6 flex flex-row">
-                <div className="flex flex-col w-1/2 border-r-2">
+            <div className="shadow-md rounded-lg bg-white m-6 flex flex-col md:flex-row">
+                <div className="flex flex-1 flex-col w-full md:w-1/2 border-r-2">
                     <div className="py-2">
                         <h1 className=" flex justify-center text-xl font-semibold">{team.title}</h1>
                     </div>
                     <div className="px-4 pb-3">
                         <h1>Members Required - {team.remaining}</h1>
                     </div>
-                    <div className="px-4">
+                    <div className="px-4 flex flex-1">
                         <h1>Team Admin - {team.name}</h1>
                     </div>
-                   {
+                   {    
                     team.isPending ? <><div className="pt-4 px-4">
                        <div className="py-2">
                           <h1 className=" hover:border-blue-700 rounded-lg text-center w-52 border-2 hover:text-blue-700 cursor-pointer" onClick={()=>navigate("/request/Pending")}>Your Request is Pending !!</h1>
@@ -81,11 +81,11 @@ const ApplyTeam = () => {
                     </>
                    }
                 </div>
-                <div className="flex flex-col w-1/2">
+                <div className="flex flex-col w-full md:w-1/2 border-t-2 md:border-none">
                     <div className="px-4 pb-3 flex justify-center">
                         <h1 className="text-xl font-semibold">About Team</h1>
                     </div>
-                    <div className="px-4 pb-3">
+                    <div className="px-4 pb-3 flex-1 flex">
                         <p>{team.description}</p>
                     </div>
                     <div className="px-4 pb-3">

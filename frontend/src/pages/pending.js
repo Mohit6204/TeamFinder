@@ -49,8 +49,8 @@ function Pending() {
                myTeam.length ? <>
                     <div className=" flex my-4 flex-col mt-10 min-h-screen">
                          {myTeam.map((team) => (
-                              <div className="flex bg-white my-2 mx-20 rounded-lg px-4 py-2 flex-row justify-between shadow-md">
-                                   <div className="pl-2 py-2 overflow-auto">
+                              <div className="flex bg-white my-2 mx-20 rounded-lg px-4 py-2 flex-col md:flex-row justify-between shadow-md">
+                                   <div className=" flex flex-col pl-2 py-2 overflow-auto w-[100%] md:w-1/2 ">
                                         <div className="py-2">
                                              <h1 className=" flex text-3xl font-medium">{team.title}</h1>
                                         </div>
@@ -65,7 +65,7 @@ function Pending() {
                                              <h1 className=" text-sm text-slate-500"><span className="">By,</span> {team.adminName}</h1>
                                         </div>
                                    </div>
-                                   <div className=" flex flex-col justify-between py-2">
+                                   <div className=" flex flex-row md:flex-col justify-between py-2">
                                         <div className=" flex">
                                              <h1 className=" text-sm hover:shadow-md hover:shadow-red-500 border-2 rounded-xl px-2 py-[2px] font-sans font-semibold hover:bg-red-700 hover:text-white cursor-pointer transition-all " onClick={() => handleCancel(team.id)}>Cancel Request <span className=" text-lg"><ion-icon name="close-circle"></ion-icon></span></h1>
                                         </div>
