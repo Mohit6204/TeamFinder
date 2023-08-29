@@ -9,6 +9,10 @@ import Messages from "./Model/message.js";
 const port = process.env.PORT || 5000;
 const app=express();
 app.use(express.json());
+app.use(cors())
+// app.use((req,res,next)=>{
+//     setTimeout(next,1000);
+// })
 const server=http.createServer(app);
 dotenv.config();
 mongoose.connect(process.env.MONGO_URI,{
@@ -64,6 +68,27 @@ app.post("/delete/:id",async (req,res)=>{
     }
 })
 
+// get all chats
+
+app.post("/getAllMessages/:id",async(req,res)=>{
+    try {
+        let {AUTH}=req.body;
+        const {id}=req.params;
+        if(AUTH===process.env.CHAT_AUTH){
+            const myChat=await Chat.findOne({teamId: id}).populate('messages');
+            res.status(200).json({
+                messages: myChat.messages
+            })
+        }
+        else{
+            res.status(500);
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500);
+    }
+})
+
 const io= new Server(server, {
     cors:{
         origin : 'http://localhost:3000'
@@ -76,13 +101,11 @@ io.on('connection',(socket)=>{
     })
     socket.on("message",async(my_message,room)=>{
          try {
-            console.log(my_message);
             const new_message=new Messages(my_message);
             const savedMessage = await new_message.save();
             const myTeam=await Chat.findOne({teamId:room});
             myTeam.messages.push(savedMessage._id);
             myTeam.save();
-            console.log(savedMessage);
             io.to(room).emit("receive",savedMessage);
          } catch (error) {
             console.log(error)

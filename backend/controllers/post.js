@@ -181,11 +181,3 @@ export const editTeam = async (req,res)=>{
         res.status(500).json({error:error.message});
     }
 }
-
-// useEffect(()=>{
-// await fetch(..);
-// socketio connect(..) ??
-// return ()=>{
-//  socketio.disconnect( .. ) ??
-// }
-// },[])

@@ -1,19 +1,41 @@
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import socketIO from "socket.io-client";
+import Load from "../components/loading";
 const Chat = () => {
   const [message, setMessage] = useState("");
   const [allmessage, setAllMessages] = useState([]);
   const User=useSelector((state)=>state.auth.myUser);
+  const pageView=useRef(null);
   const {id}=useParams();
+  const [loading,setLoading]=useState(true);
     const socketRef = useRef(null);
+    const getMessages=async ()=>{
+       try {
+        let AUTH="chatauthenticationmohit6204";
+        const res=await axios.post(`http://localhost:5000/getAllMessages/${id}`,{AUTH});
+        setAllMessages(res.data.messages);
+        setLoading(false);
+        setTimeout(()=>{
+          pageView.current?.scrollIntoView();
+        },100)
+       } catch (error) {
+          console.log(error);
+       }
+    };
   useEffect(()=>{
-
+    getMessages();
     const socket= socketIO('http://localhost:5000');
     socket.on("receive",newMessage=>{
-      console.log(newMessage);
-      setAllMessages(()=>[...allmessage, newMessage]);
+      setAllMessages((allmessage)=>[...allmessage, newMessage]);
+      // because the state variable will only be updated
+      // in the next cycle, we need to wait a bit
+      // before scrolling down!
+      setTimeout(()=>{
+        pageView.current?.scrollIntoView();
+      },100)
     })
     socket.emit("join-room",id);
     socketRef.current = socket;
@@ -42,24 +64,27 @@ const handlechange = (event) => {
       }
   }
   return (
-    <div>
+     loading ? <Load />
+      : 
+      <div>
       <div className=" bg-white min-h-screen m-10 rounded-2xl overflow-auto flex flex-col">
         <div className=" bg-purple-700 h-20 items-center flex">
           <h1 className=" text-white font-normal text-3xl flex px-10">Chat</h1>
         </div>
-        <div className=" flex-1">
-           {/* {val.length&&val.map((member)=>(
-               <div className={` p-2 my-2 flex ${member.name==="Mohit" ? " flex-row-reverse" : " flex-row"}`}>
+        <div className=" flex-1 overflow-auto max-h-[80vh]">
+           {allmessage&&allmessage.map((member)=>(
+               <div className={` p-2 my-2 flex ${member.userId===User._id ? " flex-row-reverse" : " flex-row"}`}>
                 <div className="px-2">
-                <div className={` flex pb-2 ${member.name==="Mohit" ? " justify-end" : " justify-start"}`}>
-                   {member.name}
+                <div className={` flex pb-2 ${member.userId===User._id ? " justify-end" : " justify-start"}`}>
+                   {member.userName}
                 </div>
-                 <div className={`border-2 p-4 h-fit w-fit roun ${member.name==="Mohit" ? " rounded-s-2xl bg-slate-800 text-white" : " rounded-e-2xl  bg-slate-500 text-white"} rounded-b-2xl max-w-2xl break-words`}>
-                   {member.sum}
+                 <div className={`border-2 p-4 h-fit w-fit roun ${member.userId===User._id ? " rounded-s-2xl bg-slate-800 text-white" : " rounded-e-2xl  bg-slate-500 text-white"} rounded-b-2xl max-w-2xl break-words`}>
+                   {member.content}
                  </div>
                 </div>
                </div>
-           ))} */}
+           ))}
+           <div ref={pageView}></div>
         </div>
         <div className=" flex h-14 border-2 rounded-xl p-2 m-2">
         <input

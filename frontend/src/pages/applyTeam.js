@@ -66,7 +66,7 @@ const ApplyTeam = () => {
                    {
                     team.isPending ? <><div className="pt-4 px-4">
                        <div className="py-2">
-                          <h1 className=" hover:border-blue-700 rounded-lg text-center w-52 border-2 hover:text-blue-700 cursor-pointer" onClick={()=>navigate("/Pending")}>Your Request is Pending !!</h1>
+                          <h1 className=" hover:border-blue-700 rounded-lg text-center w-52 border-2 hover:text-blue-700 cursor-pointer" onClick={()=>navigate("/request/Pending")}>Your Request is Pending !!</h1>
                        </div>
                        <div className="py-2">
                           <h1>Your Messgae - {team.message}</h1>
