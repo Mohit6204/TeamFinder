@@ -59,7 +59,7 @@ function App() {
           <Load />
          </div>
        : 
-       <div className=" bg-slate-100 min-h-screen relative" ref={parent}>
+       <div className=" bg-slate-100 dark:bg-neutral-900 min-h-screen relative" ref={parent}>
        <Navbar />
        <Routes>
          <Route path="/" element={<Home />} />

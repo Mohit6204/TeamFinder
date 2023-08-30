@@ -70,13 +70,13 @@ function Dashboard() {
             <Load />
          </div>
       </> : <>
-         <div className=" bg-slate-100 min-h-screen">
+         <div className=" bg-slate-100 dark:bg-neutral-900 min-h-screen">
             <div className="flex justify-center mt-20">
-               <div class="relative text-gray-600 focus-within:text-gray-400 shadow-sm rounded-full w-80 focus-within:shadow-md border-2 focus-within:border-0 ">
+               <div class="relative text-gray-600 dark:text-white  focus-within:text-gray-400 dark:border-neutral-700 shadow-sm rounded-full w-80 focus-within:shadow-md border-2 focus-within:border-0 ">
                   <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                      <ion-icon name="search-outline" class="w-5 h-5"></ion-icon>
                   </span>
-                  <input type="search" class="py-2 text-sm text-white bg-slate-50 rounded-full pl-10 pr-2 focus:outline-none focus:bg-white focus:text-gray-900 w-full" placeholder="Search..." value={val} onChange={handlechange} />
+                  <input type="search" class="py-2 text-sm text-white bg-slate-50 dark:bg-neutral-800 rounded-full pl-10 pr-2 focus:outline-none focus:bg-white dark:focus:bg-slate-700 focus:text-gray-900 w-full" placeholder="Search..." value={val} onChange={handlechange} />
                </div>
             </div>
             <div className=" mx-auto py-36 px-8">

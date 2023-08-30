@@ -78,7 +78,7 @@ const handlechange = (event) => {
                 <div className={` flex pb-2 ${member.userId===User._id ? " justify-end" : " justify-start"} font-medium text-sm`}>
                    {member.userName}
                 </div>
-                 <div className={`shadow-lg shadow-gray-700 border-2 p-4 h-fit w-fit roun ${member.userId===User._id ? " rounded-s-2xl bg-slate-800 text-white" : " rounded-e-2xl  bg-slate-500 text-white"} rounded-b-2xl max-w-2xl break-words`}>
+                 <div className={`border-2 p-4 h-fit w-fit roun ${member.userId===User._id ? " rounded-s-2xl bg-slate-800 text-white" : " rounded-e-2xl  bg-slate-500 text-white"} rounded-b-2xl max-w-2xl break-words`}>
                    {member.content}
                  </div>
                 </div>
