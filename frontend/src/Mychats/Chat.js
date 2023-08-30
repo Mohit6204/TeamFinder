@@ -68,17 +68,17 @@ const handlechange = (event) => {
       : 
       <div>
       <div className=" bg-white min-h-screen m-10 rounded-2xl overflow-auto flex flex-col">
-        <div className=" bg-purple-700 h-20 items-center flex shadow-purple-400 shadow-md">
-          <h1 className=" text-white font-normal text-3xl flex px-10">Chat</h1>
+        <div className=" border-b-2 h-20 items-center flex ">
+          <h1 className=" text-slate-600 font-normal text-3xl flex px-10">Chat</h1>
         </div>
         <div className=" flex-1 overflow-auto max-h-[70vh]">
            {allmessage&&allmessage.map((member)=>(
                <div className={` p-2 my-2 flex ${member.userId===User._id ? " flex-row-reverse" : " flex-row"}`}>
                 <div className="px-2">
-                <div className={` flex pb-2 ${member.userId===User._id ? " justify-end" : " justify-start"}`}>
+                <div className={` flex pb-2 ${member.userId===User._id ? " justify-end" : " justify-start"} font-medium text-sm`}>
                    {member.userName}
                 </div>
-                 <div className={`border-2 p-4 h-fit w-fit roun ${member.userId===User._id ? " rounded-s-2xl bg-slate-800 text-white" : " rounded-e-2xl  bg-slate-500 text-white"} rounded-b-2xl max-w-2xl break-words`}>
+                 <div className={`shadow-lg shadow-gray-700 border-2 p-4 h-fit w-fit roun ${member.userId===User._id ? " rounded-s-2xl bg-slate-800 text-white" : " rounded-e-2xl  bg-slate-500 text-white"} rounded-b-2xl max-w-2xl break-words`}>
                    {member.content}
                  </div>
                 </div>

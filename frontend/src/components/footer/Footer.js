@@ -7,7 +7,7 @@ function Footer() {
                          <div className=" font-bold">
                          <h2 ><span className='font-bold text-2xl '>T</span>eam<span className='font-bold'>F</span>inder</h2>
                          </div>
-                         <div className=" font-normal w-1/2 text-sm">
+                         <div className=" font-extralight w-1/2 text-sm">
                          Connecting Teams, Uniting Dreams, Find Your Perfect Team with TeamFinder!
                          </div>
                        </div>

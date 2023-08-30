@@ -75,10 +75,10 @@ const ViewTeam = () => {
                             {
                                 check.myUser._id === team.userId ?
                                     <div className="flex flex-row justify-between px-4 py-2">
-                                        <div className=" border-2 rounded-xl px-2 py-1 font-sans font-semibold hover:bg-red-700 hover:text-white cursor-pointer transition-all" onClick={() => handleDelete()}>Delete<span><ion-icon name="trash"></ion-icon></span></div>
-                                        <div className=" border-2 rounded-xl px-2 py-1 font-sans font-semibold hover:bg-gray-500 hover:text-white cursor-pointer transition-all" onClick={() => navigate(`/edit/${id}`)}>Edit<span><ion-icon name="pencil"></ion-icon></span></div>
+                                        <div className=" hover:shadow-red-500 hover:shadow-md border-2 rounded-xl px-2 py-1 font-sans font-semibold hover:bg-red-700 hover:text-white cursor-pointer transition-all" onClick={() => handleDelete()}>Delete<span><ion-icon name="trash"></ion-icon></span></div>
+                                        <div className=" hover:shadow-slate-400 hover:shadow-lg border-2 rounded-xl px-2 py-1 font-sans font-semibold hover:bg-gray-500 hover:text-white cursor-pointer transition-all" onClick={() => navigate(`/edit/${id}`)}>Edit<span><ion-icon name="pencil"></ion-icon></span></div>
                                     </div>
-                                    : <div className=" my-1 mx-auto border-2 rounded-xl px-2 py-1 font-sans font-semibold hover:bg-black/80 hover:text-white cursor-pointer transition-all" onClick={() => { handleMember(check.myUser._id); navigate("/") }}>Leave Team<span><ion-icon name="exit-outline"></ion-icon></span></div>
+                                    : <div className=" hover:shadow-md hover:shadow-slate-600 my-1 mx-auto border-2 rounded-xl px-2 py-1 font-sans font-semibold hover:bg-black/80 hover:text-white cursor-pointer transition-all" onClick={() => { handleMember(check.myUser._id); navigate("/") }}>Leave Team<span><ion-icon name="exit-outline"></ion-icon></span></div>
                             }
                 </div>
                 <div className="flex flex-col w-full md:border-none border-t-2 md:w-1/2 flex-1">
@@ -96,7 +96,7 @@ const ViewTeam = () => {
                     </div>
                 </div>
             </div>
-            <div className="bg-white">
+            <div className="bg-white min-h-[25vw]">
                 <div className=" flex justify-center text-xl font-semibold py-2">
                     <h1>Members</h1>
                 </div>
@@ -115,13 +115,13 @@ const ViewTeam = () => {
                                 </div>
                                 {check.myUser._id === team.userId && <div className="flex flex-row md:flex-col justify-center py-2">
                                     <div className=" flex ">
-                                        <h1 className=" border-2 rounded-xl px-2 py-1 font-sans font-semibold hover:bg-red-700 hover:text-white cursor-pointer transition-all " onClick={() => handleMember(member.id)}>Remove Member <span className=" text-xl"><ion-icon name="close-circle"></ion-icon></span></h1>
+                                        <h1 className=" hover:hover:shadow-red-400 hover:shadow-md border-2 rounded-xl px-2 py-1 font-sans font-semibold hover:bg-red-700 hover:text-white cursor-pointer transition-all " onClick={() => handleMember(member.id)}>Remove Member <span className=" text-xl"><ion-icon name="close-circle"></ion-icon></span></h1>
                                     </div>
                                 </div>}
                             </div>
                         </li>
                     )) : <>
-                    <div className="flex justify-center p-3">
+                    <div className="flex justify-center p-3 pb-4 mt-16">
                         <h1 className=" text-xl font-medium">Sorry, no member has been added yet.</h1>
                     </div>
                     </>}
