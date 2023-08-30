@@ -67,18 +67,18 @@ const handlechange = (event) => {
      loading ? <Load />
       : 
       <div>
-      <div className=" bg-white min-h-screen m-10 rounded-2xl overflow-auto flex flex-col">
-        <div className=" border-b-2 h-20 items-center flex ">
-          <h1 className=" text-slate-600 font-normal text-3xl flex px-10">Chat</h1>
+      <div className=" bg-white min-h-screen m-10 rounded-2xl overflow-auto flex flex-col dark:bg-black dark:shadow-neutral-600">
+        <div className=" border-b-2 h-20 items-center flex dark:bg-slate-400">
+          <h1 className=" text-slate-600 dark:text-slate-700 font-light text-3xl flex px-10">Chat</h1>
         </div>
-        <div className=" flex-1 overflow-auto max-h-[70vh]">
+        <div className=" flex-1 overflow-auto max-h-[70vh]">  
            {allmessage&&allmessage.map((member)=>(
                <div className={` p-2 my-2 flex ${member.userId===User._id ? " flex-row-reverse" : " flex-row"}`}>
                 <div className="px-2">
-                <div className={` flex pb-2 ${member.userId===User._id ? " justify-end" : " justify-start"} font-medium text-sm`}>
+                <div className={` flex pb-2 ${member.userId===User._id ? " justify-end" : " justify-start"} font-medium text-sm dark:text-slate-300`}>
                    {member.userName}
                 </div>
-                 <div className={`border-2 p-4 h-fit w-fit roun ${member.userId===User._id ? " rounded-s-2xl bg-slate-800 text-white" : " rounded-e-2xl  bg-slate-500 text-white"} rounded-b-2xl max-w-2xl break-words`}>
+                 <div className={`border-2 p-4 h-fit w-fit roun ${member.userId===User._id ? " rounded-s-2xl bg-slate-800 text-white " : " rounded-e-2xl  bg-slate-500 text-white"} rounded-b-2xl max-w-2xl break-words dark:border-none`}>
                    {member.content}
                  </div>
                 </div>
@@ -87,9 +87,9 @@ const handlechange = (event) => {
            <div ref={pageView}></div>
         </div>
         <form onSubmit={handleSubmit}>
-        <div className=" flex h-14 border-2 rounded-xl p-2 m-2 hover:shadow-md customCssInputParent">
+        <div className=" flex h-14 border-2 dark:border-neutral-800 rounded-xl p-2 m-2 hover:shadow-md customCssInputParent">
         <input
-            className="px-2 overflow-auto w-full focus:outline-none customCssInput"
+            className="dark:text-slate-200 dark:bg-black px-2 overflow-auto w-full focus:outline-none customCssInput "
             type="text"
             id="message"
             name="message"
@@ -98,7 +98,7 @@ const handlechange = (event) => {
             onChange={handlechange}
           />
           <div className=" items-center flex px-4 cursor-pointer" onClick={handleMessage}>
-          <span className=" flex text-xl"><ion-icon name="send-sharp"></ion-icon></span>
+          <span className=" flex text-xl dark:text-white"><ion-icon name="send-sharp"></ion-icon></span>
           </div>
         </div>
         </form>

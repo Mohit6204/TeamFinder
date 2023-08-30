@@ -49,7 +49,7 @@ function Dashboard() {
    const handleApply = async (id) => {
       try {
          if (check.isLogin) {
-            navigate(`/applyTeam/${id}`)
+            navigate(`/dashboard/applyTeam/${id}`)
          }
          else {
             navigate("/Login")
@@ -76,7 +76,7 @@ function Dashboard() {
                   <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                      <ion-icon name="search-outline" class="w-5 h-5"></ion-icon>
                   </span>
-                  <input type="search" class="py-2 text-sm text-white bg-slate-50 dark:bg-neutral-800 rounded-full pl-10 pr-2 focus:outline-none focus:bg-white dark:focus:bg-slate-700 focus:text-gray-900 w-full" placeholder="Search..." value={val} onChange={handlechange} />
+                  <input type="search" class="py-2 text-sm text-white bg-slate-50 dark:bg-neutral-800 rounded-full pl-10 pr-2 focus:outline-none focus:bg-white dark:focus:bg-slate-700 focus:text-gray-900 dark:focus:text-white w-full" placeholder="Search..." value={val} onChange={handlechange} />
                </div>
             </div>
             <div className=" mx-auto py-36 px-8">
@@ -85,9 +85,9 @@ function Dashboard() {
                      myTeam.length ? <>
                         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
                            {myTeam.map((team) => (
-                              <div className="shadow-md rounded-2xl bg-white m-6 hover:shadow-xl hover:m-5 hover:p-4 duration-200 cursor-pointer p-3 flex flex-col flex-1" onClick={() => handleApply(team._id)}>
+                              <div className="shadow-md rounded-2xl dark:bg-black dark:hover:shadow-slate-600 bg-white m-6 hover:shadow-xl hover:m-5 hover:p-4 duration-200 cursor-pointer p-3 flex flex-col flex-1" onClick={() => handleApply(team._id)}>
                                  <div className="py-2">
-                                    <h1 className=" flex justify-center text-2xl font-medium">{team.title}</h1>
+                                    <h1 className=" flex justify-center text-2xl font-medium dark:text-slate-400">{team.title}</h1>
                                  </div>
                                  <div className=" flex justify-center py-1 pb-2">
                                     <hr className=" w-full rounded-full bg-black border-[1px] border-gray-200 " />
@@ -97,12 +97,12 @@ function Dashboard() {
                                        <div className="px-4 pb-3 ">
                                           <p className=" text-sm text-slate-600 justify-end">{team.description}</p>
                                        </div>
-                                       <div className="px-4 pb-3">
+                                       <div className="px-4 pb-3  dark:text-white">
                                           <p>{team.skillRequired}</p>
                                        </div>
                                     </div>
                                     <div className="">
-                                       <div className="px-4 pb-3 flex justify-end">
+                                       <div className="px-4 pb-3 flex justify-end  dark:text-white">
                                           <h1><span className=" text-xl font-medium">{team.remaining}</span><span className=" text-xs"> Members Required</span></h1>
                                        </div>
                                        <div className="px-4 pb-3">
@@ -114,13 +114,13 @@ function Dashboard() {
                            ))}
                         </div>
                      </> : <>
-                        <div className=" flex justify-center p-4 items-center flex-col">
+                        <div className=" flex justify-center p-4 items-center flex-col dark:text-slate-300">
                            <h1 className=" text-xl font-medium">Oops, it looks like the team you searched for does not exist.</h1>
                            <h1 className="py-2">We suggest you to try different keywords.</h1>
                         </div>
                      </>
                      : <>
-                        <div className=" flex justify-center p-4 items-center">
+                        <div className=" flex justify-center p-4 items-center dark:text-slate-300">
                            <h1 className=" text-xl font-medium">Sorry, no team is available now.</h1>
                         </div>
                      </>

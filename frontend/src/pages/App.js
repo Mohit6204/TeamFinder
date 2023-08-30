@@ -55,7 +55,7 @@ function App() {
    },[])
    return (
       loading && !check.isLogin  ? 
-         <div className="flex justify-center w-full h-full my-40 ">
+         <div className="flex justify-center w-full h-full my-40 dark:bg-neutral-900">
           <Load />
          </div>
        : 
@@ -70,10 +70,10 @@ function App() {
           <><Route path="/teams/create" element={<CreateTeam />} />
          <Route path="/request/Accepted" element={<Accepted />} />
          <Route path="/request/Pending" element={<Pending />} />
-         <Route path="/edit/:id" element={<EditTeam />} />
-         <Route path="/applyTeam/:id" element={<ApplyTeam />} />
+         <Route path="/teams/edit/:id" element={<EditTeam />} />
+         <Route path="/dashboard/applyTeam/:id" element={<ApplyTeam />} />
          <Route path="/teams/myTeams" element={<MyTeams />} />
-         <Route path="/team/:id" element={<ViewTeam />} />
+         <Route path="/teams/:id" element={<ViewTeam />} />
          <Route path="/teams/join" element={<Join />} />
          <Route path="/viewProfile" element={<EditProfile />} />
          <Route path="/chat/:id" element={<Chat />} />

@@ -18,11 +18,11 @@ function NavLinks({pathMap}){
        {links.map((link)=>(
          <div className="z-30">
             <div className="px-3 text-left cursor-default group">
-                <h1 className={`md:py-7 py-3 flex justify-between cursor-pointer items-center group relative inline-block overflow-hidden after:absolute after:content-[''] ${pathMap[link.name]?"after:left-0 after:from-blue-200 after:to-blue-500":'after:-left-full after:from-indigo-400 after:to-indigo-700'} after:bg-gradient-to-l after:transition-all hover:after:left-0 ${navState.open ? "after:w-[13%] after:bottom-1" : "after:w-full after:bottom-6"} after:h-1 `} onClick={()=>{
+                <h1 className={`dark:text-white md:py-7 py-3 flex justify-between cursor-pointer items-center group relative inline-block overflow-hidden after:absolute after:content-[''] ${pathMap[link.name]?"after:left-0 after:from-blue-200 after:to-blue-500":'after:-left-full after:from-indigo-400 after:to-indigo-700'} after:bg-gradient-to-l after:transition-all hover:after:left-0 ${navState.open ? "after:w-[13%] after:bottom-1" : "after:w-full after:bottom-6"} after:h-[2px] `} onClick={()=>{
                     navState.heading !== link.name ? dispatch(setHeading(link.name)) : dispatch(setHeading(''))
                 }}>{link.name}
                 
-                <span className=" text-xl md:hidden inline">
+                <span className=" text-xl md:hidden inline ">
                     <ion-icon name={`${navState.heading===link.name ? 'chevron-up' : 'chevron-down'}`}></ion-icon>
                 </span>
 
@@ -35,13 +35,13 @@ function NavLinks({pathMap}){
                     <div className={` absolute top-20 hidden group-hover:md:block hover:md:block`}>
                         <div className="py-3">
                             <div className=" w-4 h-4 left-3 absolute mt-2
-                                bg-white rotate-45">
+                                bg-white dark:bg-black rotate-45">
 
                             </div>
                         </div>
-                        <div className="bg-white p-3 rounded-md">
+                        <div className="bg-white p-3 rounded-md dark:bg-black ">
                             {link.sublinks.map((item)=>(
-                              <li className="text-sm my-2.5" onClick={()=>dispatch(setHeading(''))}>
+                              <li className="dark:text-white text-sm my-2.5 hover:text-blue-500" onClick={()=>dispatch(setHeading(''))}>
                                 <Link to={`${item.link}`}>{item.head}</Link>
                               </li>
                             ))}
@@ -52,7 +52,7 @@ function NavLinks({pathMap}){
             {/* Mobile View */}
             <div className={`${navState.heading===link.name ? 'md:hidden' : 'hidden'}`}>
                 {link.sublinks.map((item)=>(
-                    <li className=" py-3 pl-8 md:pr-0 pr-5" onClick={()=>{dispatch(setHeading(''));dispatch(setOpen(false))}}>
+                    <li className=" py-3 pl-8 md:pr-0 pr-5 dark:text-white hover:text-blue-500" onClick={()=>{dispatch(setHeading(''));dispatch(setOpen(false))}}>
                         <Link to={item.link}>{item.head}</Link>
                     </li>
                 ))}
