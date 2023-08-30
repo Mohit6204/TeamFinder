@@ -64,7 +64,7 @@ const Login=()=>{
              }}>Submit</button>
         </div>
         <div className=" flex justify-center pt-6" >
-            <h1 className="dark:text-white hover:text-blue-700 cursor-pointer" onClick={()=>navigate("/Register")}>Don't have an Account?</h1>
+            <h1 className="dark:text-white hover:text-blue-700 dark:hover:text-blue-500 cursor-pointer" onClick={()=>navigate("/Register")}>Don't have an Account?</h1>
         </div>
         {(message!=="")&&<div className=" flex justify-center pt-6" >
             <h1 className=" text-red-700 font-semibold">!!  {message}</h1>

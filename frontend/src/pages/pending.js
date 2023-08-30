@@ -70,7 +70,7 @@ function Pending() {
                                              <h1 className="dark:bg-red-500 dark:text-white text-sm hover:shadow-md hover:shadow-red-500 border-2 rounded-xl px-2 py-[2px] font-sans font-semibold hover:bg-red-700 hover:text-white cursor-pointer transition-all " onClick={() => handleCancel(team.id)}>Cancel Request <span className=" text-lg"><ion-icon name="close-circle"></ion-icon></span></h1>
                                         </div>
                                         <div className=" text-sm flex justify-center">
-                                             <h1 className="dark:bg-blue-500 dark:text-white hover:shadow-md hover:shadow-blue-500  border-2 rounded-xl px-2 py-[2px] font-sans font-semibold hover:bg-blue-700 hover:text-white cursor-pointer transition-all text-center " onClick={() => navigate(`/applyTeam/${team.id}`)}>View Team <span className=" text-lg"><ion-icon name="eye"></ion-icon></span></h1>
+                                             <h1 className="dark:bg-blue-500 dark:text-white hover:shadow-md hover:shadow-blue-500  border-2 rounded-xl px-2 py-[2px] font-sans font-semibold hover:bg-blue-700 hover:text-white cursor-pointer transition-all text-center " onClick={() => navigate(`/dashboard/applyTeam/${team.id}`)}>View Team <span className=" text-lg"><ion-icon name="eye"></ion-icon></span></h1>
                                         </div>
                                    </div>
                               </div>

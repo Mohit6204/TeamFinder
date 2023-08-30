@@ -95,7 +95,7 @@ const Register=()=>{
                 }}>Submit</button>
            </div>
            <div className=" flex justify-center pt-6" >
-            <h1 className=" dark:text-white hover:text-blue-700 cursor-pointer" onClick={()=>navigate("/Login")}>Already have an Account</h1>
+            <h1 className=" dark:text-white hover:text-blue-700 dark:hover:text-blue-500 cursor-pointer" onClick={()=>navigate("/Login")}>Already have an Account</h1>
         </div>
         {(exist)&&<div className=" flex justify-center pt-6" >
             <h1 className=" text-red-700 font-semibold">{exist}</h1>

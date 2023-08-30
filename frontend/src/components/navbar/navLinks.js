@@ -41,7 +41,7 @@ function NavLinks({pathMap}){
                         </div>
                         <div className="bg-white p-3 rounded-md dark:bg-black ">
                             {link.sublinks.map((item)=>(
-                              <li className="dark:text-white text-sm my-2.5 hover:text-blue-500" onClick={()=>dispatch(setHeading(''))}>
+                              <li className="dark:text-white text-sm my-2.5 hover:text-blue-500 dark:hover:text-blue-500" onClick={()=>dispatch(setHeading(''))}>
                                 <Link to={`${item.link}`}>{item.head}</Link>
                               </li>
                             ))}
@@ -52,7 +52,7 @@ function NavLinks({pathMap}){
             {/* Mobile View */}
             <div className={`${navState.heading===link.name ? 'md:hidden' : 'hidden'}`}>
                 {link.sublinks.map((item)=>(
-                    <li className=" py-3 pl-8 md:pr-0 pr-5 dark:text-white hover:text-blue-500" onClick={()=>{dispatch(setHeading(''));dispatch(setOpen(false))}}>
+                    <li className=" py-3 pl-8 md:pr-0 pr-5 dark:text-white hover:text-blue-500 dark:hover:text-blue-500" onClick={()=>{dispatch(setHeading(''));dispatch(setOpen(false))}}>
                         <Link to={item.link}>{item.head}</Link>
                     </li>
                 ))}
