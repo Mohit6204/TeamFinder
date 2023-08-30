@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import NavLinks from './navLinks';
 import Button from './button';
 import {useSelector } from 'react-redux/es/hooks/useSelector';
 import { setLogin, setMyUser } from "../../store/authSlice";
 import { useDispatch } from 'react-redux';
-import { setOpen } from '../../store/mainSlice';
+import { setDark, setOpen } from '../../store/mainSlice';
 
 function Navbartop() {
   const dispatch=useDispatch();
@@ -26,6 +26,18 @@ function Navbartop() {
   const navState=useSelector((state)=>state.main);
   const navigate=useNavigate();
   const [profile,setProfile]=useState(false);
+  useEffect(()=>{
+    if(navState.dark){
+      if(!document.documentElement.classList.contains('dark')){
+        document.documentElement.classList.add('dark')
+      }
+    }
+    else{
+      if(document.documentElement.classList.contains('dark')){
+        document.documentElement.classList.remove('dark')
+      }
+    }
+ },[navState.dark])
   return (
       <nav className='bg-white dark:bg-black shadow-lg dark:shadow-slate-800'>
          <div className='flex items-center font-medium justify-between'>
@@ -46,7 +58,10 @@ function Navbartop() {
               </li>
               {check.isLogin && <NavLinks pathMap={pathMap}  />}
             </ul>
-            <div className='md:block hidden mx-10 text-center'>
+            <div className='md:flex hidden mx-4 text-center '>
+            <div className='pr-10 flex items-center text-3xl max-md:hidden cursor-pointer dark:text-white' onClick={()=>dispatch(setDark(!navState.dark))}>
+              <ion-icon name={`${navState.dark ? 'moon' : 'sunny'}`}></ion-icon>
+              </div>
              {!check.isLogin ? (<>
                             <Button 
                             name="Login"

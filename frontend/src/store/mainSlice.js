@@ -5,6 +5,7 @@ const mainSlice = createSlice({
     initialState:{
          open:false,
          heading:"",
+         dark:false,
     },
     reducers:{
       setOpen(state,action){
@@ -12,9 +13,12 @@ const mainSlice = createSlice({
       },
       setHeading(state,action){
         state.heading=action.payload;
+      },
+      setDark(state,action){
+        state.dark=action.payload;
       }
     },
 });
 
-export const {setOpen,setHeading}=mainSlice.actions;
+export const {setOpen,setHeading,setDark}=mainSlice.actions;
 export default mainSlice.reducer;

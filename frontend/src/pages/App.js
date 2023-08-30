@@ -51,11 +51,10 @@ function App() {
   } 
    useEffect(()=>{
        getTeam();
-
    },[])
    return (
       loading && !check.isLogin  ? 
-         <div className="flex justify-center w-full h-full my-40 dark:bg-neutral-900">
+         <div className="flex justify-center h-screen dark:bg-neutral-900">
           <Load />
          </div>
        : 
