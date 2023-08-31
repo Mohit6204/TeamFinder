@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import NavLinks from "./navLinks";
-import Button from "./button";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { setLogin, setMyUser } from "../../store/authSlice";
 import { useDispatch } from "react-redux";
@@ -17,7 +16,7 @@ function Navbartop() {
   };
   const location = useLocation();
   const pathMap = {
-    home: location.pathname == "/",
+    home: location.pathname === "/",
     dashboard: location.pathname.includes("/dashboard"),
     Requests: location.pathname.includes("/request"),
     "My Teams": location.pathname.includes("/teams"),
@@ -26,17 +25,6 @@ function Navbartop() {
   const navState = useSelector((state) => state.main);
   const navigate = useNavigate();
   const [profile, setProfile] = useState(false);
-  useEffect(() => {
-    if (navState.dark) {
-      if (!document.documentElement.classList.contains("dark")) {
-        document.documentElement.classList.add("dark");
-      }
-    } else {
-      if (document.documentElement.classList.contains("dark")) {
-        document.documentElement.classList.remove("dark");
-      }
-    }
-  }, [navState.dark]);
   return (
     <nav className="bg-white dark:bg-black shadow-lg dark:shadow-slate-800">
       <div className="flex items-center font-medium justify-between">
@@ -45,12 +33,21 @@ function Navbartop() {
             <span className="font-bold text-3xl ">T</span>eam
             <span className="font-bold">F</span>inder
           </h2>
+        <div className=" flex">
+        <div
+            className={`pr-10  text-2xl md:hidden ${navState.open&&'hidden'} transition-all duration-200 cursor-pointer dark:text-white`}
+            onClick={() => dispatch(setDark(navState.dark?false:true))}
+          >
+            <ion-icon name={`${navState.dark ? "moon" : "sunny"}`}></ion-icon>
+          </div>
           <div
             className="text-3xl md:hidden cursor-pointer transition-all dark:text-white"
             onClick={() => dispatch(setOpen(!navState.open))}
           >
             <ion-icon name={`${navState.open ? "close" : "menu"}`}></ion-icon>
+
           </div>
+        </div>
         </div>
         <ul className="md:flex hidden items-center gap-3 ">
           <li className="flex flex-row gap-7 px-3">
@@ -77,14 +74,14 @@ function Navbartop() {
         </ul>
         <div className="md:flex hidden mx-4 text-center ">
           <div
-            className="pr-10 flex items-center text-3xl max-md:hidden cursor-pointer dark:text-white"
+            className="pr-10 flex items-center text-2xl max-md:hidden cursor-pointer dark:text-white"
             onClick={() => dispatch(setDark(!navState.dark))}
           >
             <ion-icon name={`${navState.dark ? "moon" : "sunny"}`}></ion-icon>
           </div>
           {!check.isLogin ? (
             <>
-              <Button name="Login" />
+           <Link to={`/Login`} className="bg-white hover:shadow-md hover:shadow-slate-700 text-black border-2 px-4 py-1 rounded-full mx-2 hover:bg-black/80 hover:text-white transition-all">Login</Link>
             </>
           ) : (
             <>
@@ -142,7 +139,7 @@ function Navbartop() {
 
         <ul
           className={`
-            md:hidden bg-white/40 absolute backdrop-blur-lg w-full h-full bottom-0 py-24 pl-4
+            md:hidden bg-white/40 dark:bg-white/20 absolute backdrop-blur-lg w-full h-full bottom-0 py-24 pl-4
             duration-500 ${navState.open ? "left-0" : "left-[-100%]"} z-30
             `}
         >
@@ -179,18 +176,13 @@ function Navbartop() {
             {!check.isLogin ? (
               <>
                 <div onClick={() => dispatch(setOpen(false))}>
-                  <Button name="Login" />
+                <Link to={`/Login`} className="bg-white hover:shadow-md hover:shadow-slate-700 text-black border-2 px-4 py-1 rounded-full mx-2 hover:bg-black/80 hover:text-white transition-all">Login</Link>
                 </div>
               </>
             ) : (
-              <div
-                onClick={() => {
-                  dispatch(setOpen(false));
-                  handleLogout();
-                }}
-              >
-                <Button name="Logout" />
-                <Button name="Edit Profile" />
+              <div onClick={()=>{dispatch(setOpen(false))}}>
+                <div onClick={handleLogout} className="mb-4 cursor-pointer bg-white hover:shadow-md hover:shadow-slate-700 text-black border-2 px-4 py-1 rounded-full mx-2 hover:bg-black/80 hover:text-white transition-all w-fit">Logout</div>
+                <div onClick={()=>{navigate("/viewProfile")}} className="mb-4 cursor-pointer bg-white hover:shadow-md hover:shadow-slate-700 text-black border-2 px-4 py-1 rounded-full mx-2 hover:bg-black/80 hover:text-white transition-all w-fit">Edit Profile</div>
               </div>
             )}
           </div>

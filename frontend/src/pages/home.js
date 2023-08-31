@@ -1,7 +1,9 @@
 import React from "react";
 import SVG from '../images/team'
+import { useSelector } from "react-redux";
 
 const Home= ()=>{
+   const navState=useSelector((state)=>state.main)
   return (
      <div className="bg-white dark:bg-neutral-900">
        <div className="flex border-t-2 gap-2 flex-col lg:flex-row">
@@ -16,7 +18,7 @@ const Home= ()=>{
                <p className="p-4 px-2 text-sm tracking-wider leading-6 text-slate-500">Building successful teams starts here. Discover your ideal teammates with TeamFinder - the cutting-edge app designed to connect you with like - minded individuals who share your goals and passions. Whether you're an entrepreneur with a groundbreaking startup idea, a sports enthusiast looking to join a recreational team, or someone seeking collaborators for a creative project, TeamFinder has you covered.</p>
           </div>
           <div className="flex md:flex-1">
-             <SVG className="w-full dark:bg-neutral-900"/>
+             <SVG className="w-full dark:bg-neutral-900" dark={navState.dark}/>
           </div>
        </div>
      </div>
