@@ -9,7 +9,7 @@ const Register=()=>{
     const dispatch=useDispatch();
     const addUser = async (newUser) => {
         try {
-          const res=await axios.post("http://localhost:8080/auth/register",newUser);
+          const res=await axios.post(`${process.env.REACT_APP_MAIN_BACKEND}/auth/register`,newUser);
           if(res.status===500){
             console.log(res.data);
             return;

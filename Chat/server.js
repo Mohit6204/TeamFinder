@@ -92,7 +92,7 @@ app.post("/getAllMessages/:id",async(req,res)=>{
 
 const io= new Server(server, {
     cors:{
-        origin : 'http://localhost:3000'
+        origin : process.env.FRONTEND_URL
     }
 })
 io.on('connection',(socket)=>{

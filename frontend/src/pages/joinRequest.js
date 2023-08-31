@@ -13,7 +13,7 @@ function Join() {
 
      const getjoin = async () => {
           try {
-               const res = await axios.get("http://localhost:8080/request/join", {
+               const res = await axios.get(`${process.env.REACT_APP_MAIN_BACKEND}/request/join`, {
                     headers: {
                          "authorization": check.myToken,
                     }
@@ -33,7 +33,7 @@ function Join() {
      const handleConfirm = async (team_id, user_id, isConfirmed) => {
           try {
                const value = { team_id, user_id, isConfirmed };
-               const res = await axios.post("http://localhost:8080/request/confirmation", value, {
+               const res = await axios.post(`${process.env.REACT_APP_MAIN_BACKEND}/request/confirmation`, value, {
                     headers: {
                          "authorization": check.myToken,
                     }

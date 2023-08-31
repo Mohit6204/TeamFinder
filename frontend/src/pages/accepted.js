@@ -12,7 +12,7 @@ function Accepted() {
    const [loading, setLoading] = useState(true);
    const getAccepted = async () => {
       try {
-         const res = await axios.get("http://localhost:8080/request/accepted", {
+         const res = await axios.get(`${process.env.REACT_APP_MAIN_BACKEND}/request/accepted`, {
             headers: {
                "authorization": check.myToken,
             }

@@ -13,7 +13,7 @@ function Pending() {
 
      const getpending = async () => {
           try {
-               const res = await axios.get("http://localhost:8080/request/pending", {
+               const res = await axios.get(`${process.env.REACT_APP_MAIN_BACKEND}/request/pending`, {
                     headers: {
                          "authorization": check.myToken,
                     }
@@ -29,7 +29,7 @@ function Pending() {
      }, []);
      const handleCancel = async (id) => {
           try {
-               const res = await axios.get(`http://localhost:8080/request/cancelRequest/${id}`, {
+               const res = await axios.get(`${process.env.REACT_APP_MAIN_BACKEND}/request/cancelRequest/${id}`, {
                     headers: {
                          "authorization": check.myToken,
                     }

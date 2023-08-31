@@ -12,7 +12,7 @@ function Dashboard() {
    const [loading, setLoading] = useState(true);
    const getTeams = async () => {
       try {
-         const res = await axios.get("http://localhost:8080/post/allTeams");
+         const res = await axios.get(`${process.env.REACT_APP_MAIN_BACKEND}/post/allTeams`);
          setMyTeam(res.data);
          setInitial(res.data);
          setLoading(false);
@@ -23,7 +23,7 @@ function Dashboard() {
    };
    const getLoginTeams = async () => {
       try {
-         const res = await axios.get("http://localhost:8080/post/getTeams", {
+         const res = await axios.get(`${process.env.REACT_APP_MAIN_BACKEND}/post/getTeams`, {
             headers: {
                "authorization": check.myToken,
             }

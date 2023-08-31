@@ -12,7 +12,7 @@ function EditTeam() {
          try {
             if(check.myToken){
                newTeam.remaining=newTeam.intake;
-            const res=await axios.patch(`http://localhost:8080/post/editTeam/${id}`,newTeam,{
+            const res=await axios.patch(`${process.env.REACT_APP_MAIN_BACKEND}/post/editTeam/${id}`,newTeam,{
                headers:{
                     "authorization":check.myToken,
                }
@@ -40,7 +40,7 @@ function EditTeam() {
     }
     const getTeam=async()=>{
      try {
-          const res=await axios.get(`http://localhost:8080/post/edit/${id}`,{
+          const res=await axios.get(`${process.env.REACT_APP_MAIN_BACKEND}/post/edit/${id}`,{
                headers:{
                     "authorization":check.myToken,
                }

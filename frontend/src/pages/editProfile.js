@@ -11,7 +11,7 @@ const EditProfile=()=>{
     const saveChanges = async (newUser) => {
         try {
            if(check.myToken){
-           const res=await axios.patch(`http://localhost:8080/auth/editProfile`,newUser,{
+           const res=await axios.patch(`${process.env.REACT_APP_MAIN_BACKEND}/auth/editProfile`,newUser,{
               headers:{
                    "authorization":check.myToken,
               }
@@ -29,7 +29,7 @@ const EditProfile=()=>{
       const [User, setUser] = useState({})
       const getProfile=async()=>{
         try {
-             const res=await axios.get(`http://localhost:8080/auth/edit`,{
+             const res=await axios.get(`${process.env.REACT_APP_MAIN_BACKEND}/auth/edit`,{
                   headers:{
                        "authorization":check.myToken,
                   }

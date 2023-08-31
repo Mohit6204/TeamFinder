@@ -9,7 +9,7 @@ const Login=()=>{
     const [message,setMessage]=useState("");
     const checkLogin = async (newUser)=>{
        try {
-         const res=await axios.post("http://localhost:8080/auth/login",newUser);
+         const res=await axios.post(`${process.env.REACT_APP_MAIN_BACKEND}/auth/login`,newUser);
          if(res.status===500){
             console.log(res.data);
             return;

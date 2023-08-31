@@ -17,7 +17,7 @@ const ApplyTeam = () => {
     }
     const handleApply= async(message)=>{
        try {
-          const res=await axios.post("http://localhost:8080/request/apply",{message,id},{
+          const res=await axios.post(`${process.env.REACT_APP_MAIN_BACKEND}/request/apply`,{message,id},{
             headers:{
                  "authorization":check.myToken,
             }
@@ -29,7 +29,7 @@ const ApplyTeam = () => {
     }
     const getTeam=async()=>{
        try {
-        const res=await axios.get(`http://localhost:8080/request/getTeam/${id}`,{
+        const res=await axios.get(`${process.env.REACT_APP_MAIN_BACKEND}/request/getTeam/${id}`,{
             headers:{
                  "authorization":check.myToken,
             }

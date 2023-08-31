@@ -12,7 +12,7 @@ const ViewTeam = () => {
     const [loading, setLoading] = useState(true);
     const getMyTeam = async () => {
         try {
-            const res = await axios.get(`http://localhost:8080/post/team/${id}`, {
+            const res = await axios.get(`${process.env.REACT_APP_MAIN_BACKEND}/post/team/${id}`, {
                 headers: {
                     "authorization": check.myToken,
                 }
@@ -30,7 +30,7 @@ const ViewTeam = () => {
 
     const deleteTeam = async () => {
         try {
-            const res = await axios.delete(`http://localhost:8080/post/delete/${id}`, {
+            const res = await axios.delete(`${process.env.REACT_APP_MAIN_BACKEND}/post/delete/${id}`, {
                 headers: {
                     "authorization": check.myToken,
                 }
@@ -45,7 +45,7 @@ const ViewTeam = () => {
     }
     const handleMember = async (user_id) => {
         try {
-            const res = await axios.delete(`http://localhost:8080/request/delete/${id}/${user_id}`, {
+            const res = await axios.delete(`${process.env.REACT_APP_MAIN_BACKEND}/request/delete/${id}/${user_id}`, {
                 headers: {
                     "authorization": check.myToken,
                 }

@@ -66,7 +66,7 @@ export const createTeam=async (req,res)=>{
         const savedPost=await newpost.save();
         let auth="chatauthenticationmohit6204";
         try{
-            await axios.post(`http://localhost:5000/create/${savedPost._id}`,{auth});
+            await axios.post(`${process.env.BACKEND_URL}/create/${savedPost._id}`,{auth});
         }catch(err){
             console.log(err)
         }
@@ -107,7 +107,7 @@ export const deleteTeam =async (req,res)=>{
             }
         }));
         try{
-            const res = await axios.post(`http://localhost:5000/delete/${team._id}`,{auth: process.env.AUTH})
+            const res = await axios.post(`${process.env.BACKEND_URL}/delete/${team._id}`,{auth: process.env.AUTH})
         }catch(err){
             console.log(err)
         }

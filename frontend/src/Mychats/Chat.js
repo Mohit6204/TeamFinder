@@ -15,7 +15,7 @@ const Chat = () => {
     const getMessages=async ()=>{
        try {
         let AUTH="chatauthenticationmohit6204";
-        const res=await axios.post(`http://localhost:5000/getAllMessages/${id}`,{AUTH});
+        const res=await axios.post(`${process.env.REACT_APP_BACKEND_URL}/getAllMessages/${id}`,{AUTH});
         setAllMessages(res.data.messages);
         setLoading(false);
         setTimeout(()=>{
@@ -27,7 +27,7 @@ const Chat = () => {
     };
   useEffect(()=>{
     getMessages();
-    const socket= socketIO('http://localhost:5000');
+      const socket= socketIO(`${process.env.REACT_APP_BACKEND_URL}`);
     socket.on("receive",newMessage=>{
       setAllMessages((allmessage)=>[...allmessage, newMessage]);
       // because the state variable will only be updated

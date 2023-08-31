@@ -65,7 +65,7 @@ function App() {
   const getTeam = async () => {
     try {
       const token = window.localStorage.getItem("token");
-      const res = await axios.get("http://localhost:8080/auth/getUser", {
+      const res = await axios.get(`${process.env.REACT_APP_MAIN_BACKEND}/auth/getUser`, {
         headers: {
           authorization: token,
         },

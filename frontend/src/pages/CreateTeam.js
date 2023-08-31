@@ -8,7 +8,7 @@ function Createteam() {
      const makeTeam = async (newTeam) => {
          try {
             if(check.myToken){
-            const res=await axios.post("http://localhost:8080/post/create",newTeam,{
+            const res=await axios.post(`${process.env.REACT_APP_MAIN_BACKEND}/post/create`,newTeam,{
                headers:{
                     "authorization":check.myToken,
                }

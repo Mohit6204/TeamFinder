@@ -13,7 +13,7 @@ const MyTeams = () => {
 
    const getmyTeams = async () => {
       try {
-         const res = await axios.get("http://localhost:8080/post/myteams", {
+         const res = await axios.get(`${process.env.REACT_APP_MAIN_BACKEND}/post/myteams`, {
             headers: {
                "authorization": check.myToken,
             }
