@@ -10,9 +10,7 @@ const port = process.env.PORT || 5000;
 const app=express();
 app.use(express.json());
 app.use(cors())
-// app.use((req,res,next)=>{
-//     setTimeout(next,1000);
-// })
+
 const server=http.createServer(app);
 dotenv.config();
 mongoose.connect(process.env.MONGO_URI,{
@@ -39,13 +37,13 @@ app.post("/create/:id",async (req,res)=>{
            messages:[],
         });
         await newChat.save();
-        res.status(200);
+        res.status(200).send();
        }
        else{
-         res.status(500);
+         res.status(500).send();
        }
      } catch (error) {
-        res.status(500);
+        res.status(500).send();
      }
 })
 
@@ -56,15 +54,18 @@ app.post("/delete/:id",async (req,res)=>{
         let {auth}=req.body;
         if(auth==process.env.CHAT_AUTH){
             const {id}=req.params;
-            const newChat = Chat.find({teamId:id});
+            const newChat = await Chat.findOne({teamId:id});
+            await Promise.all(newChat.messages.map((myMessage)=>{
+               return Messages.findByIdAndDelete(myMessage);
+            }));
             await Chat.deleteOne(newChat);
-            res.status(200);
-        }
+            res.status(200).send();
+        }  
         else{
-            res.status(500)
+            res.status(500).send();
         }
     } catch (error) {
-        res.status(500);
+        res.status(500).send();
     }
 })
 
@@ -81,11 +82,11 @@ app.post("/getAllMessages/:id",async(req,res)=>{
             })
         }
         else{
-            res.status(500);
+            res.status(500).send();
         }
     } catch (error) {
         console.log(error)
-        res.status(500);
+        res.status(500).send();
     }
 })
 

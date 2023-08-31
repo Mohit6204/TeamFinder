@@ -65,7 +65,11 @@ export const createTeam=async (req,res)=>{
         });
         const savedPost=await newpost.save();
         let auth="chatauthenticationmohit6204";
-        axios.post(`http://localhost:5000/create/${savedPost._id}`,{auth});
+        try{
+            await axios.post(`http://localhost:5000/create/${savedPost._id}`,{auth});
+        }catch(err){
+            console.log(err)
+        }
         newuser.teams.push({_id:savedPost._id});
         newuser.save();
         res.status(201).json(savedPost);
@@ -102,8 +106,11 @@ export const deleteTeam =async (req,res)=>{
                 await regUser.save();
             }
         }));
-        let auth="chatauthenticationmohit6204";
-        axios.post(`http://localhost:5000/delete/${team._id}`,{auth});
+        try{
+            const res = await axios.post(`http://localhost:5000/delete/${team._id}`,{auth: process.env.AUTH})
+        }catch(err){
+            console.log(err)
+        }
         await Team.findByIdAndDelete(team._id);
         res.status(200);
     } catch (error) {

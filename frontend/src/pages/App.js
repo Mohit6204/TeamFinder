@@ -88,7 +88,7 @@ function App() {
     getTeam();
   }, []);
   return loading && !check.isLogin ? (
-    <div className="flex justify-center h-screen dark:bg-neutral-900">
+    <div className="flex flex-col justify-center pt-[25vh] dark:bg-neutral-900">
       <Load />
     </div>
   ) : (
