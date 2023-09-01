@@ -38,8 +38,8 @@ const MyTeams = () => {
 
    return (
       !loading ? <>
-         <div className=" mx-auto py-36 px-8 ">
-            <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
+         <div className=" mx-auto py-36 px-8 min-h-screen">
+            {myTeam.length ? <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
                {myTeam.map((team) => (
                   <div className="shadow-md flex flex-1 flex-col rounded-2xl dark:bg-black bg-white m-6 hover:shadow-xl hover:m-5 duration-200 cursor-pointer p-3 hover:p-4 hover:dark:shadow-slate-600" onClick={() => handleView(team)}>
                      <div className="py-2">
@@ -59,8 +59,12 @@ const MyTeams = () => {
                      </div>
                   </div>
                ))}
-            </div>
-         </div>
+            </div> : <div className=" flex flex-col justify-center items-center dark:text-slate-300">
+                         <h1 className=" text-xl font-medium">Sorry, You have not created a team yet !!</h1>
+                         <div className="flex py-2 hover:text-blue-600 cursor-pointer text-2xl pt-8" onClick={() => navigate("/teams/create")}>Create now</div>
+                    </div>
+                    }
+                    </div>
       </> : <>
          <div className="flex justify-center w-full h-full my-40 ">
             <Load />
