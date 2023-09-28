@@ -30,7 +30,7 @@ function Accepted() {
 
    const handleView = (team) => {
       try {
-         navigate(`/team/${team.id}`)
+         navigate(`/teams/${team.id}`)
       } catch (error) {
 
       }
@@ -42,8 +42,8 @@ function Accepted() {
             <Load />
          </div>
       </> :
-         myTeam.length ? <>
-            <div className=" my-6 mx-auto py-2 px-8 bg-slate-100 dark:bg-neutral-900">
+         myTeam.length ? <div className=" flex min-h-screen">
+            <div className="  my-6 mx-auto py-2 px-8 bg-slate-100 dark:bg-neutral-900">
                <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
                   {myTeam.map((team) => (
                      <div className="dark:bg-black hover:dark:shadow-slate-600 shadow-md flex flex-1 flex-col rounded-2xl bg-white m-6 hover:shadow-xl hover:m-5 duration-200 cursor-pointer p-3 hover:p-4" onClick={() => handleView(team)}>
@@ -67,7 +67,7 @@ function Accepted() {
                   ))}
                </div>
             </div>
-         </> : <>
+         </div> : <>
             <div className=" flex justify-center p-4 h-screen items-center flex-col dark:text-slate-300">
                <h1 className=" text-xl font-medium">Sorry, you are not added to any team yet.</h1>
                <div className="py-2 hover:text-blue-600 cursor-pointer" onClick={() => navigate("/Pending")}>Your Requests</div>
