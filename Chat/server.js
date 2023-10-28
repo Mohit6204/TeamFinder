@@ -117,5 +117,5 @@ io.on('connection',(socket)=>{
 
 server.listen(port,(error)=>{
     if(error)console.log(error);
-    console.log("Chat server is running on port 5000");
+    console.log(`Chat server is running on port ${port}`);
 })
