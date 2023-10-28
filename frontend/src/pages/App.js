@@ -5,7 +5,6 @@ import Accepted from "./accepted";
 import Pending from "./pending";
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./dashboard";
-import EditTeam from "./editTeam";
 import Home from "./home";
 import Login from "./login";
 import Register from "./register";
@@ -23,6 +22,7 @@ import PageNotFound from "../components/pageNotFound";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import Chat from "../Mychats/Chat";
 import { setDark } from "../store/mainSlice";
+import EditTeam from "./editTeam";
 
 function App() {
   const check = useSelector((state) => state.auth);
